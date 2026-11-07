@@ -1,0 +1,20 @@
+---
+import type { LearningPlan } from '../lib/learning';
+import type { Locale } from '../content/lessons';
+import { describeMove } from '../lib/presentation';
+interface Props { plan: LearningPlan; locale: Locale; }
+const { plan, locale } = Astro.props;
+const ko = locale === 'ko';
+---
+<section class="formula-guide" data-formula-guide aria-labelledby="formula-title">
+  <div class="formula-heading"><h2 id="formula-title" data-formula-title>{ko ? (plan.recurring ? '외울 기본 공식' : '이번 예시의 순서') : (plan.recurring ? 'The formula to learn' : 'This example’s moves')}</h2><button class="text-button" data-formula-copy disabled>{ko ? '공식 복사' : 'Copy formula'}</button></div>
+  <p class="formula-summary" data-formula-summary>{plan.recurring ? (ko ? `이 예시에서 ${plan.formula.length}동작을 ${plan.repetitions}회` : `${plan.formula.length} moves, ${plan.repetitions} time(s) in this example`) : (ko ? `이 예시의 ${plan.formula.length}동작을 순서대로 해요.` : `Follow these ${plan.formula.length} moves in order.`)}</p>
+  <div class="formula-chunks" data-algorithm role="list" aria-label={ko ? '회전 공식' : 'Move formula'}>
+    {plan.chunks.map(chunk => <div class="formula-chunk"><div class="formula-tokens">{chunk.moves.map((move, i) => {
+      return <span class="formula-token" data-formula-token data-index={chunk.start + i} role="listitem" aria-label={describeMove(move, locale)}><b data-symbol>{move.replace("'", '′')}</b><b data-mask hidden>?</b></span>;
+    })}</div></div>)}
+  </div>
+  <p class="alignment-note" data-alignment hidden></p>
+  <div class="formula-tools"><label><input type="checkbox" data-formula-hide disabled />{ko ? '공식 가리고 연습' : 'Hide formula to recall'}</label><span data-formula-copy-status role="status"></span></div>
+  <label class="copy-fallback" data-copy-fallback hidden>{ko ? '선택된 공식을 직접 복사해 주세요.' : 'Copy the selected formula manually.'}<input data-copy-text readonly aria-label={ko ? '복사할 공식' : 'Formula to copy'} /></label>
+</section>

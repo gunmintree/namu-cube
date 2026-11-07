@@ -1,0 +1,8 @@
+---
+interface Props { layer: 1 | 2 | 3; label: string; }
+const { layer, label } = Astro.props;
+---
+<div class={`layer-diagram layer-${layer}`} role="img" aria-label={label}>
+  <div class="layer-face">{Array.from({ length: 9 }, (_, i) => <span class:list={['layer-tile', { 'tile-solved': Math.floor(i / 3) >= 3 - layer }]}></span>)}</div>
+  <div class="layer-side">{Array.from({ length: 9 }, (_, i) => <span class:list={['layer-tile', { 'tile-solved': Math.floor(i / 3) >= 3 - layer }]}></span>)}</div>
+</div>

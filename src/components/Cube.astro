@@ -1,0 +1,15 @@
+---
+import { solvedCube } from '../lib/cube';
+import type { Sticker } from '../lib/cube';
+import { stickerTransform, colorNames } from '../lib/presentation';
+interface Props { state?: Sticker[]; locale?: 'ko' | 'en'; large?: boolean; interactive?: boolean; }
+const { state = solvedCube(), locale = 'ko', large = false, interactive = false } = Astro.props;
+---
+<div class:list={['cube-scene', { 'cube-scene-large': large }]} data-orbit={interactive ? '' : undefined}>
+  <div class="cube-shadow" aria-hidden="true"></div>
+  <div class="cube-body" role="img" aria-label={locale === 'ko' ? '학습용 3×3 큐브 예시' : 'Example 3×3 learning cube'}>
+    {state.map((sticker) => <span class={`cube-sticker color-${sticker.color}`} data-sticker={sticker.id} style={`transform:${stickerTransform(sticker)}`} aria-hidden="true">
+      {sticker.position.filter(n => n === 0).length === 2 && <span class="center-letter">{colorNames[locale][sticker.color].slice(0, 1)}</span>}
+    </span>)}
+  </div>
+</div>

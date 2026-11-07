@@ -1,0 +1,22 @@
+---
+const { locale = 'ko', page = 'about' } = Astro.props;
+const ko = locale === 'ko';
+const base = ko ? '' : '/en';
+---
+<article class="container information-page">
+  {page === 'about' ? <>
+    <h1>{ko ? '차근차근 큐브에 대해' : 'About Namu Cube'}</h1>
+    <p class="lead">{ko ? '직접 보고 따라 하며, 실물 큐브를 한 층씩 맞추는 매뉴얼이에요.' : 'A visual manual for solving the cube in your hands, one layer at a time.'}</p>
+    <section><h2>{ko ? '첫 번째 가지, 큐브' : 'Our first branch: the cube'}</h2><p>{ko ? '한 번에 모든 공식을 외우기보다, 조각 하나를 찾고 한 동작을 따라 해요. 처음이라면 흰 십자부터 시작하고, 맞춘 층이 있다면 필요한 단계부터 골라보세요.' : 'Find one piece and try one turn before memorizing algorithms. Start with the white cross, or choose the layer you have reached.'}</p></section>
+    <section><h2>{ko ? '작은 화면도 편하게' : 'Made for small screens too'}</h2><p>{ko ? '휴대전화와 태블릿에서도 글과 큐브를 함께 볼 수 있게 만들고 있어요. 어려운 설명은 접어 두고, 필요한 순간에 펼쳐볼 수 있어요.' : 'Keep the cube and its instructions close on a phone or tablet. More detailed help is there when you need it.'}</p></section>
+    <section><h2>{ko ? '참고한 학습 자료' : 'Learning references'}</h2><p>{ko ? '해법의 원리와 사례는 아래 자료를 비교했습니다. 설명과 학습 화면은 나무나무에서 새로 구성했습니다.' : 'We compared the methods and cases in these resources, then wrote our own explanations and built our own learning screens.'}</p><ul class="source-links"><li><a href="https://rubiks.com/solve-guide">Rubik’s 3×3 solve guide</a></li><li><a href="https://jperm.net/3x3">J Perm beginner tutorial</a></li><li><a href="https://ruwix.com/the-rubiks-cube/how-to-solve-the-rubiks-cube-beginners-method/">Ruwix beginner method</a></li><li><a href="https://onlinecube.com/rubik-kyubeu/">OnlineCube</a></li></ul></section>
+    <a class="button primary" href={`${base}/`}>{ko ? '큐브 배우기' : 'Learn the cube'}</a>
+  </> : <>
+    <h1>{ko ? '개인정보 안내' : 'Your privacy'}</h1>
+    <p class="lead">{ko ? '현재 버전은 계정 없이 이용할 수 있어요.' : 'You can use this version without an account.'}</p>
+    <section><h2>{ko ? '학습 기록은 이 기기에' : 'Learning progress stays here'}</h2><p>{ko ? '이어하기를 위해 마지막으로 본 수업과 직접 확인한 단계만 브라우저의 로컬 저장소에 보관합니다. 이름, 이메일, 생년월일을 묻지 않으며 학습 기록을 서버에 보내지 않습니다.' : 'To resume learning, we store only your last lesson and the stages you marked as checked in your browser’s local storage. We do not ask for your name, email, or birthday, and we do not send your learning progress to a server.'}</p><button class="button secondary" data-clear-progress disabled>{ko ? '이 기기의 학습 기록 지우기' : 'Clear progress on this device'}</button><noscript><p>{ko ? '기록 삭제 버튼은 JavaScript가 필요해요. 브라우저 설정에서도 이 사이트의 데이터를 지울 수 있어요.' : 'Clearing progress here needs JavaScript. You can also clear site data in your browser settings.'}</p></noscript><p class="storage-result" data-clear-result role="status"></p></section>
+    <section><h2>{ko ? '광고와 외부 추적' : 'Ads and external tracking'}</h2><p>{ko ? '현재 버전에는 광고, 외부 방문 분석 도구, 음성 읽기, 카메라 접근 기능이 없습니다. 외부 참고자료 링크를 누르면 해당 사이트의 개인정보 처리 방침이 적용됩니다.' : 'This version has no ads, third-party analytics, read-aloud feature, or camera access. If you follow an external reference link, that website’s privacy policy applies.'}</p></section>
+    <section><h2>{ko ? '공개 운영 전 안내' : 'Before public hosting'}</h2><p>{ko ? '이 안내는 현재 구현한 기능을 설명합니다. 공개 배포 시 선택한 호스팅의 접속 로그와 운영자 연락처 등을 확인해 안내를 보완해야 합니다. 광고나 서버 저장 기능이 추가되면 처리 항목과 목적을 먼저 알립니다.' : 'This notice describes the current implementation. Before public deployment, it must be completed with the chosen host’s access logging details and the operator’s contact information. If ads or server storage are added, their purpose and data handling must be explained first.'}</p></section>
+    <p class="small-note">{ko ? '기준일: 2026년 11월 7일' : 'As of November 7, 2026'}</p>
+  </>}
+</article>

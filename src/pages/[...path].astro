@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CubeIndex from '../components/CubeIndex.astro';
+import LessonPage from '../components/Lesson.astro';
+import Info from '../components/Info.astro';
+import { allLessons, text } from '../content/lessons';
+import type { Locale } from '../content/lessons';
+export function getStaticPaths() {
+  return (['ko', 'en'] as const).flatMap(locale => {
+    const prefix = locale === 'en' ? 'en/' : '';
+    return ['', 'about', 'privacy', ...allLessons.map(l => `learn/${l.slug}`)].map(page => ({ params: { path: (prefix + page).replace(/\/$/, '') || undefined }, props: { locale, page } }));
+  });
+}
+const { locale, page } = Astro.props as { locale: Locale; page: string };
+const lesson = page.startsWith('learn/') ? allLessons.find(l => l.slug === page.split('/').at(-1)) : undefined;
+const ko = locale === 'ko';
+const title = lesson ? text(lesson.title, locale) : page === 'about' ? (ko ? '이 매뉴얼에 대해' : 'About this manual') : page === 'privacy' ? (ko ? '개인정보 안내' : 'Privacy') : (ko ? '큐브 맞추기, 첫 완성까지' : 'Your first cube, one layer at a time');
+const alternate = `${ko ? '/en' : ''}/${page}${page ? '/' : ''}`;
+---
+<Layout title={title} locale={locale} current={page === '' || lesson ? 'cube' : page} alternate={alternate} description={lesson ? text(lesson.goal, locale) : undefined}>
+  {page === '' ? <CubeIndex locale={locale} /> : lesson ? <LessonPage lesson={lesson} locale={locale} /> : <Info page={page} locale={locale} />}
+</Layout>

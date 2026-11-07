@@ -1,0 +1,37 @@
+---
+import '../styles/site.css';
+import { allLessons } from '../content/lessons';
+interface Props { title: string; description?: string; locale?: 'ko' | 'en'; current?: string; alternate?: string; }
+const { title, description, locale = 'ko', current = '', alternate = locale === 'ko' ? '/en/' : '/' } = Astro.props;
+const base = locale === 'en' ? '/en' : '';
+const ko = locale === 'ko';
+const home = (import.meta.env.PUBLIC_HOME_URL || (import.meta.env.DEV ? 'http://127.0.0.1:4321' : '')).replace(/\/$/, '');
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#fafaf7" />
+    <script is:inline>try { const mode = localStorage.getItem('namutree:cube:theme'); if (mode === 'light' || mode === 'dark') document.documentElement.dataset.mode = mode; } catch { /* 저장소가 없으면 시스템 테마를 따른다. */ }</script>
+    <title>{title} | {ko ? '차근차근 큐브' : 'Namu Tree Cube'}</title>
+    <meta name="description" content={description ?? (ko ? '흰 십자부터 한 층씩. 움직이는 큐브를 보며 실물 3×3 큐브를 맞춰보세요.' : 'From the white cross to the last layer. Learn your real 3×3 cube, one move at a time.')} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {Astro.site && <link rel="alternate" hreflang={ko ? 'en' : 'ko'} href={new URL(alternate, Astro.site)} />}
+    {Astro.site && <link rel="alternate" hreflang={locale} href={canonical} />}
+  </head>
+  <body data-lesson-slugs={allLessons.map(lesson => lesson.slug).join(',')}>
+    <a class="skip-link" href="#main">{ko ? '본문으로 건너뛰기' : 'Skip to content'}</a>
+    <header class="site-header"><nav class="container navigation" aria-label={ko ? '주 메뉴' : 'Main navigation'}>
+      <a class="wordmark" href={`${base}/`} aria-label={ko ? '차근차근 큐브 홈' : 'Cube home'}><svg width="29" height="29" viewBox="0 0 30 30" aria-hidden="true"><path fill="currentColor" d="M0 0h8v8H0zm11 0h8v8h-8zm11 0h8v8h-8zM0 11h8v8H0zm11 0h8v8h-8zm11 0h8v8h-8zM0 22h8v8H0zm11 0h8v8h-8zm11 0h8v8h-8z"/></svg><span>{ko ? '차근차근 큐브' : 'Namu Cube'}</span></a>
+      <div class="nav-links"><a href={`${base}/#steps`} aria-current={current === 'cube' ? 'page' : undefined}>{ko ? '수업' : 'Lessons'}</a><a class="about-nav" href={`${base}/#help`}>{ko ? '도움말' : 'Help'}</a><a class="language-link" href={alternate} lang={ko ? 'en' : 'ko'} aria-label={ko ? 'Switch to English' : '한국어로 변경'}>{ko ? 'EN' : '한국어'}</a><button class="theme-toggle" data-theme-toggle aria-label={ko ? '화면 테마 전환' : 'Switch color theme'} aria-pressed="false" disabled><svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z" stroke-linejoin="round" /></svg><svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" stroke-linecap="round" /></svg></button></div>
+    </nav></header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer"><div class="container footer-inner"><div><a class="wordmark footer-wordmark" href={`${base}/`}>{ko ? '차근차근 큐브' : 'Namu Cube'}</a><p>{ko ? '한 조각씩, 내 손으로.' : 'Piece by piece. In your own hands.'}</p></div><nav class="footer-links" aria-label={ko ? '하단 메뉴' : 'Footer navigation'}><a href={`${base}/about/`}>{ko ? '매뉴얼 소개' : 'About'}</a><a href={`${base}/privacy/`}>{ko ? '개인정보 안내' : 'Privacy'}</a>{home && <a href={`${home}${base}/`}>{ko ? '나무나무 홈' : 'Namu Tree home'}</a>}</nav><small>© {new Date().getUTCFullYear()} Namu Tree</small></div></footer>
+    <script>import '../scripts/progress-ui';</script>
+    <script>import '../scripts/theme';</script>
+  </body>
+</html>
+<style is:global>
+  html,body { overflow-x: clip; }
+</style>

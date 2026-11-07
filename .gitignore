@@ -1,0 +1,17 @@
+node_modules/
+dist/
+artifacts/
+coverage/
+test-results/
+playwright-report/
+*.log
+*.tsbuildinfo
+docs/local/
+.*
+!.gitignore
+!.gitattributes
+!.github/
+!.env.example
+!.editorconfig
+!.nvmrc
+!.node-version
