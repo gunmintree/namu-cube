@@ -26,6 +26,12 @@ npm run test:site
 
 새 큐브 사례는 시작 조건, 각 확인 지점, 동작 후 결과와 이전 층 보존을 검사한다. 화면의 시연 완료와 실물의 완료는 구분한다. 실제 독자의 이해도와 실물 사용성은 별도 평가가 필요하다.
 
+빌드 결과 자체를 검사하려면 개발 서버와 다른 포트에서 `npm exec --offline -- astro preview --host 127.0.0.1 --port 4324`를 실행한 뒤 `BASE_URL`을 `http://127.0.0.1:4324`로 지정해 브라우저 검사를 실행한다. 소스 검증과 실제 초보자의 학습 성과 검증은 구분한다.
+
+고도화 범위는 [기획안](superpowers/specs/2026-11-08-learning-reconstruction-design.md), 실행 기록은 [계획](superpowers/plans/2026-11-08-learning-reconstruction.md), 반복 작업 방식은 [AI 개발 절차](development-workflow.md)를 따른다. [사용자 관찰지](research/usability-study.md)는 실제 큐브를 준비하는 수순과 과제별 기록 양식을 포함한다.
+
+`.impeccable/design.json`과 `.impeccable/surfaces/cube.md`는 디자인 토큰·화면 계약을 기록한다. 리뷰 캡처·도구 상태·개인 설정은 Git에 포함하지 않는다.
+
 ## 구조
 
 - `src/content/`: 한국어·영어 수업, 사례와 진행 안내

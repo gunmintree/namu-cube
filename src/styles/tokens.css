@@ -3,10 +3,10 @@
   color-scheme: light;
   --font-body: 'NamuSansSubset', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   --font-display: var(--font-body); --font-mono: ui-monospace, Consolas, monospace;
-  --color-paper: #fafaf7; --color-paper-2: #f1f2ed; --color-paper-3: #e8e9e2;
-  --color-card: #fffefa; --color-ink: #20231f; --color-ink-2: #3c423b; --color-muted: #62675f; --color-rule: #dedfd8;
-  --color-accent: #2549df; --color-focus: #2549df; --color-stage: #eef2f7; --color-stage-deep: #dce4ef;
-  --color-accent-ink: #fffefa; --color-field-edge: #727c75;
+  --color-paper: #f8fafd; --color-paper-2: #edf1f7; --color-paper-3: #dce3ed;
+  --color-card: #ffffff; --color-ink: #172b44; --color-ink-2: #354b66; --color-muted: #53647a; --color-rule: #cfd9e5;
+  --color-accent: #2549df; --color-focus: #2549df; --color-stage: #e9eff8; --color-stage-deep: #cfdbec;
+  --color-accent-ink: #ffffff; --color-field-edge: #6c7c90;
   --color-forest: var(--color-accent); --color-forest-ink: var(--color-accent-ink); --color-forest-light: var(--color-stage);
   --color-mint-deep: #2549df; --color-edge: #dedfd8; --color-clear: transparent; --color-success: #286242;
   --color-shadow: #20231f1a; --color-ink-on-cube: #171c21;

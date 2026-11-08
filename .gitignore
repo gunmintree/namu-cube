@@ -15,3 +15,9 @@ docs/local/
 !.editorconfig
 !.nvmrc
 !.node-version
+!.impeccable/
+.impeccable/*
+!.impeccable/design.json
+!.impeccable/surfaces/
+.impeccable/surfaces/*
+!.impeccable/surfaces/cube.md

@@ -5,6 +5,17 @@ const slugs = (document.body.dataset.lessonSlugs ?? '').split(',').filter(Boolea
 let storage: Storage | null = null;
 try { storage = window.localStorage; } catch { /* 저장 기능 없이 계속한다. */ }
 const progress = readProgress(storage, slugs);
+
+// 보조 설명을 포함한 저장 기록에서 본 수업의 직접 확인만 집계한다.
+document.querySelectorAll<HTMLElement>('[data-course-progress]').forEach(section => {
+  const mainSlugs = (section.dataset.courseProgress ?? '').split(',').filter(Boolean);
+  const checked = mainSlugs.filter(slug => progress?.completed.includes(slug)).length;
+  const meter = section.querySelector<HTMLProgressElement>('progress');
+  const count = section.querySelector<HTMLElement>('[data-progress-count]');
+  if (meter) { meter.max = mainSlugs.length; meter.value = checked; }
+  if (count) count.textContent = `${checked} / ${mainSlugs.length}`;
+  section.hidden = false;
+});
 document.querySelectorAll<HTMLAnchorElement>('[data-resume]').forEach(link => {
   if (!progress) return;
   const base = link.dataset.locale === 'en' ? '/en' : '';

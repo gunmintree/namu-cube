@@ -23,6 +23,90 @@ async function check(name, action) {
 const count = () => page.$eval('[data-move-count]', element => Number(element.textContent.split('/')[0].trim()));
 const ready = () => page.waitForFunction(() => !document.querySelector('[data-case]').disabled);
 try {
+  await check('journey: bilingual starting points follow the main course', async () => {
+    for (const prefix of ['', '/en']) {
+      await go(`${prefix}/`);
+      assert.ok(await page.$('[data-stage-finder]'), '시작 지점을 찾는 영역이 있다');
+      assert.ok(await page.$('[data-find-start]'), '첫 시작 버튼 가까이에 시작 지점 찾기 링크가 있다');
+      await page.click('[data-find-start]');
+      assert.equal(await page.$eval('[data-stage-finder]', element => element.open), true, '시작 지점 링크가 안내를 직접 펼친다');
+      assert.deepEqual(await page.$$eval('[data-entry-slug]', elements => elements.map(element => element.getAttribute('href'))), ['white-cross','white-corners','middle-layer','yellow-cross','yellow-edges','yellow-corners','finish'].map(slug => `${prefix}/learn/${slug}/`));
+      assert.equal((await page.$$('[data-entry-slug] p')).length, 7, '각 선택에 실물 시작 조건이 있다');
+    }
+  });
+  await check('journey: progress counts only personally checked main lessons', async () => {
+    await go('/');
+    await page.evaluate(storageKey => localStorage.setItem(storageKey, JSON.stringify({ version: 1, lastSlug: 'ready', completed: ['ready','daisy','white-cross','middle-layer'] })), key);
+    await go('/');
+    assert.ok(await page.$('[data-course-progress]'), '본 수업 진행 표시가 있다');
+    assert.deepEqual(await page.$eval('[data-course-progress] progress', element => ({ value: element.value, max: element.max })), { value: 2, max: 7 });
+    assert.match(await page.$eval('[data-progress-count]', element => element.textContent), /2\s*\/\s*7/);
+    await page.evaluate(storageKey => localStorage.removeItem(storageKey), key);
+  });
+  await check('journey: case and grip precede the demonstration at both widths', async () => {
+    for (const width of [320, 1280]) {
+      await page.setViewport({ width, height: 900 });
+      await go('/en/learn/middle-layer/'); await ready();
+      assert.ok(await page.$('.lesson-preparation'), '시연 전 준비 영역이 있다');
+      assert.equal(await page.evaluate(() => {
+        const visual = document.querySelector('.lesson-visual').getBoundingClientRect();
+        return ['.case-choice', '.hold-instruction'].every(selector => document.querySelector(selector).getBoundingClientRect().bottom <= visual.top);
+      }), true);
+      const options = await page.$$eval('[data-case] option', elements => elements.map(element => element.value));
+      const before = await page.$eval('[data-case-when]', element => element.textContent);
+      await page.select('[data-case]', options[1]);
+      assert.notEqual(await page.$eval('[data-case-when]', element => element.textContent), before);
+      const expectedGrip = await page.evaluate(() => {
+        const data = JSON.parse(document.querySelector('#lesson-data').textContent);
+        return data.lesson.cases.find(item => item.id === document.querySelector('[data-case]').value).hold.en;
+      });
+      assert.equal(await page.$eval('[data-case-hold]', element => element.textContent), expectedGrip);
+    }
+  });
+  await check('journey: opening recovery stops playback and keeps final-layer guidance', async () => {
+    await page.setViewport({ width: 1280, height: 900 });
+    await go('/en/learn/finish/'); await ready();
+    assert.ok(await page.$('[data-recovery]'), '막힘 복구 영역이 있다');
+    await page.click('[data-play]');
+    await page.click('.recovery-link');
+    assert.equal(await page.$eval('[data-recovery]', element => element.open), true, '막힘 링크가 복구 안내를 직접 펼친다');
+    await ready();
+    assert.notEqual(await page.$eval('[data-play]', element => element.textContent), 'Pause');
+    const paused = await count();
+    await new Promise(resolve => setTimeout(resolve, 950));
+    assert.equal(await count(), paused);
+    assert.match(await page.$eval('[data-recovery]', element => element.textContent), /lower layers/i);
+    assert.match(await page.$eval('[data-recovery]', element => element.textContent), /only the screen/i);
+    assert.equal(await page.evaluate(storageKey => JSON.parse(localStorage.getItem(storageKey)).completed.includes('finish'), key), false, '복구와 재생은 실물 완료를 기록하지 않는다');
+  });
+  await check('journey: no-script starting points and recovery remain readable', async () => {
+    const plain = await browser.newPage();
+    try {
+      await plain.setJavaScriptEnabled(false);
+      await plain.goto(new URL('/en/', base).href, { waitUntil: 'networkidle0' });
+      assert.equal(await plain.$eval('[data-course-progress]', element => element.hidden), true, '불러오지 못한 기록을 0개로 단정하지 않는다');
+      await plain.click('[data-find-start]');
+      assert.equal(await plain.$eval('[data-stage-finder]', element => element.open), true);
+      assert.equal((await plain.$$('[data-entry-slug]')).length, 7);
+      await plain.goto(new URL('/en/learn/finish/', base).href, { waitUntil: 'networkidle0' });
+      await plain.click('[data-recovery] > summary');
+      assert.match(await plain.$eval('[data-recovery]', element => element.innerText), /lower layers/i);
+    } finally { await plain.close(); }
+  });
+  await check('journey: re-entering open recovery pauses restarted playback', async () => {
+    await page.setViewport({ width: 1280, height: 900 });
+    await go('/en/learn/finish/'); await ready();
+    await page.click('.recovery-link');
+    assert.equal(await page.$eval('[data-recovery]', element => element.open), true);
+    await page.click('[data-recovery] a[href="#cube-practice"]');
+    await page.click('[data-play]');
+    await page.click('.recovery-link');
+    await ready();
+    assert.notEqual(await page.$eval('[data-play]', element => element.textContent), 'Pause');
+    const paused = await count();
+    await new Promise(resolve => setTimeout(resolve, 950));
+    assert.equal(await count(), paused);
+  });
   for (const width of [320, 360, 390, 768, 1280]) {
     await page.setViewport({ width, height: 900, deviceScaleFactor: 1 });
     for (const route of ['/', '/en/', '/learn/white-cross/', '/learn/white-corners/', '/learn/yellow-cross/', '/en/learn/yellow-edges/', '/en/learn/finish/']) {

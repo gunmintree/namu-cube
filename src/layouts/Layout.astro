@@ -11,7 +11,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : null;
 <!doctype html>
 <html lang={locale}>
   <head>
-    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#fafaf7" />
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#f8fafd" />
     <script is:inline>try { const mode = localStorage.getItem('namutree:cube:theme'); if (mode === 'light' || mode === 'dark') document.documentElement.dataset.mode = mode; } catch { /* 저장소가 없으면 시스템 테마를 따른다. */ }</script>
     <title>{title} | {ko ? '차근차근 큐브' : 'Namu Tree Cube'}</title>
     <meta name="description" content={description ?? (ko ? '흰 십자부터 한 층씩. 움직이는 큐브를 보며 실물 3×3 큐브를 맞춰보세요.' : 'From the white cross to the last layer. Learn your real 3×3 cube, one move at a time.')} />

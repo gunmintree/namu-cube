@@ -198,6 +198,12 @@ if (host && json?.textContent) {
     syncCamera();
   });
   q('[data-complete]').addEventListener('click', () => { saveProgress(storage, lesson.slug, slugs, true); });
+  host.querySelectorAll<HTMLDetailsElement>('[data-recovery]').forEach(help => {
+    help.addEventListener('toggle', () => { if (help.open) { stop(); update(); } });
+  });
+  host.querySelectorAll<HTMLAnchorElement>('a[href="#recovery"]').forEach(link => {
+    link.addEventListener('click', () => { stop(); update(); });
+  });
   document.addEventListener('visibilitychange', () => { if (document.hidden) { stop(); update(); } });
   window.addEventListener('pagehide', stop);
   resetCamera(); loadCase();
