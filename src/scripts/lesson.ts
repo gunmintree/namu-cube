@@ -97,6 +97,17 @@ if (host && json?.textContent) {
     for (const move of moves) frames.push(applyMove(frames[frames.length - 1], move));
     cursor = 0;
     view.render(frames[0]);
+    const preview = host!.querySelector<SVGSVGElement>('[data-case-preview]')!;
+    const previewLabel = `${ko ? '시작 예시' : 'Starting example'}: ${current.title[locale]}`;
+    preview.setAttribute('aria-label', previewLabel);
+    preview.querySelector('[data-preview-title]')!.textContent = previewLabel;
+    preview.querySelectorAll<SVGGElement>('[data-preview-face]').forEach(group => {
+      const colors = getFaceGrid(frames[0], group.getAttribute('data-preview-face') as Face);
+      Array.from(group.children).forEach((tile, index) => {
+        tile.setAttribute('class', `preview-sticker color-${colors[index]}`);
+        tile.querySelector('title')!.textContent = colorNames[locale][colors[index]];
+      });
+    });
     q('[data-case-when]').textContent = current.when[locale];
     q('[data-case-hold]').textContent = current.hold[locale];
     q('[data-case-after]').textContent = current.after[locale];
@@ -181,7 +192,7 @@ if (host && json?.textContent) {
   });
   orbit.addEventListener('pointermove', event => {
     if (!drag || event.pointerId !== drag.id) return;
-    view.setAngle(drag.degrees + (event.clientX - drag.x) * .5, drag.tilt - (event.pointerType === 'touch' ? 0 : event.clientY - drag.y) * .5);
+    view.setAngle(drag.degrees + (event.clientX - drag.x) * .5, drag.tilt - (event.clientY - drag.y) * .5);
     syncCamera();
   });
   const endDrag = () => { drag = null; orbit.classList.remove('is-dragging'); };

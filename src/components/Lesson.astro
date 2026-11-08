@@ -2,6 +2,7 @@
 import Cube from './Cube.astro';
 import Formula from './Formula.astro';
 import RecoveryHelp from './RecoveryHelp.astro';
+import CasePreview from './CasePreview.astro';
 import { lessons, allLessons, text } from '../content/lessons';
 import type { Lesson, Locale } from '../content/lessons';
 import { solvedCube, applyAlgorithm, inverseAlgorithm, getFaceGrid } from '../lib/cube';
@@ -35,17 +36,16 @@ const data = JSON.stringify({ lesson, locale, slugs: allLessons.map(l => l.slug)
       <h2><span class="task-number" aria-hidden="true">1</span><label for="case-choice">{ko ? '내 큐브와 같은 사례 고르기' : 'Choose a case for your cube'}</label></h2>
       <p class="starting-condition"><strong>{ko ? '시작 전 확인' : 'Before starting'}</strong>{text(guide.before, locale)}</p>
       <select id="case-choice" data-case disabled>{lesson.cases.map(c => <option value={c.id}>{text(c.title, locale)}</option>)}</select>
-      <p class="case-when" data-case-when>{text(first.when, locale)}</p>
+      <figure class="case-preview"><CasePreview state={initial} locale={locale} label={`${ko ? '시작 예시' : 'Starting example'}: ${text(first.title, locale)}`} /><figcaption><p class="case-when" data-case-when>{text(first.when, locale)}</p><p class="case-preview-note">{ko ? '찾는 조각과 주변 가운데 색을 비교해요. 전체 색 배치는 달라도 돼요.' : 'Compare the chosen piece and nearby centers. The whole pattern can differ.'}</p></figcaption></figure>
     </div>
     <div class="hold-instruction"><h2><span class="task-number" aria-hidden="true">2</span>{ko ? '이렇게 잡아요' : 'Hold it like this'}</h2><p data-case-hold>{text(first.hold, locale)}</p><a class="text-link" href="#cube-practice">{ko ? '준비됐어요, 시연 보기' : 'Ready, see the demonstration'}</a></div>
   </section>
   <div class="lesson-workspace">
     <div class="lesson-visual" id="cube-practice" tabindex="-1">
       <div class="practice-heading"><h2><span class="task-number" aria-hidden="true">3</span>{ko ? '한 묶음씩 따라 해요' : 'Follow one group at a time'}</h2><p>{ko ? '화면은 연습 예시예요.' : 'The screen is a practice example.'}</p></div>
-      <div class="viewer-label"><button class="text-button" data-bottom data-tilt="28" aria-pressed="false" disabled>{ko ? '아랫면 보기' : 'See the bottom'}</button></div>
       <Formula plan={practice} locale={locale} />
       <Cube state={initial} locale={locale} interactive />
-      <p class="cube-gesture-hint" id="view-help">{ko ? '드래그, 좌우 쓸기, 방향키로 둘러봐요.' : 'Look around with a drag, sideways swipe, or arrow keys.'}</p>
+      <p class="cube-gesture-hint" id="view-help">{ko ? '큐브 안에서 상하·좌우로 끌어 둘러봐요. 페이지는 큐브 바깥에서 스크롤해요. 방향키로도 볼 수 있어요.' : 'Drag inside the cube to look up, down, left, or right. Scroll the page outside the cube. Arrow keys also work.'}</p>
       <div class="checkpoint-status" aria-live="polite" aria-atomic="true"><strong data-checkpoint-title>{text(first.checkpoints[0].title, locale)}</strong><p data-checkpoint-copy>{text(first.when, locale)}</p></div>
       <div class="player-status" aria-live="polite" aria-atomic="true"><b class="active-move" data-active-move>{first.moves.split(' ')[0].replace("'", '′')}</b><div><span class="routine-position" data-routine-position>{ko ? '다음 동작' : 'Next move'}</span><strong data-move-copy>{ko ? '한 동작씩 돌려보세요.' : 'Watch one move at a time.'}</strong></div><span data-move-count>0 / {first.moves.trim().split(/\s+/).filter(Boolean).length}</span></div>
       <div class="player-controls">
@@ -53,10 +53,10 @@ const data = JSON.stringify({ lesson, locale, slugs: allLessons.map(l => l.slug)
         <button class="button primary" data-next disabled>{ko ? '한 동작' : 'Next move'}</button>
         <button class="button secondary" data-play disabled>{ko ? '묶음 재생' : 'Play group'}</button>
       </div>
-      <div class="replay-controls"><button class="text-button" data-replay-group disabled>{ko ? '이 묶음 다시 보기' : 'Replay this group'}</button><span>{ko ? '다시 보기는 화면만 되돌려요.' : 'Replay rewinds only the screen.'}</span></div>
-      <div class="player-options"><button class="text-button" data-reset disabled>{ko ? '예시 처음부터' : 'Reset example'}</button><label>{ko ? '속도' : 'Speed'} <select data-speed disabled><option value="1000">{ko ? '천천히' : 'Slow'}</option><option value="500">{ko ? '보통' : 'Normal'}</option></select></label></div>
+      <div class="replay-controls"><button class="button secondary utility-button" data-replay-group disabled>{ko ? '이 묶음 다시 보기' : 'Replay this group'}</button><span>{ko ? '다시 보기는 화면만 되돌려요.' : 'Replay rewinds only the screen.'}</span></div>
+      <div class="player-options"><button class="button secondary utility-button" data-reset disabled>{ko ? '예시 처음부터' : 'Reset example'}</button><label>{ko ? '속도' : 'Speed'} <select data-speed disabled><option value="1000">{ko ? '천천히' : 'Slow'}</option><option value="500">{ko ? '보통' : 'Normal'}</option></select></label></div>
       <p class="demo-complete" data-demo-complete role="status" hidden>{ko ? '예시의 여섯 면이 맞았어요. 실물도 확인한 뒤 완료해요.' : 'All six example faces are solved. Check your real cube before finishing.'}</p>
-      <details class="view-disclosure"><summary>{ko ? '큐브의 다른 쪽 보기' : 'See another side'}</summary><div class="orbit-help"><button class="text-button" data-view-reset disabled>{ko ? '설명 방향으로' : 'Instruction view'}</button></div><div class="view-controls" aria-label={ko ? '큐브 관찰 방향' : 'View the cube'}>
+      <details class="view-disclosure"><summary>{ko ? '큐브의 다른 쪽 보기' : 'See another side'}</summary><div class="orbit-help"><button class="button secondary utility-button" data-view-reset disabled>{ko ? '설명 방향으로' : 'Instruction view'}</button></div><div class="view-controls" aria-label={ko ? '큐브 관찰 방향' : 'View the cube'}>
         <button data-view="-32" aria-pressed="true" disabled>{ko ? '앞과 오른쪽' : 'Front / right'}</button>
         <button data-view="32" aria-pressed="false" disabled>{ko ? '앞과 왼쪽' : 'Front / left'}</button>
         <button data-view="148" aria-pressed="false" disabled>{ko ? '뒤쪽' : 'Back'}</button>

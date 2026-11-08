@@ -1,6 +1,8 @@
 import puppeteer from 'puppeteer-core';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
+import { solvedCube, applyAlgorithm, inverseAlgorithm, getFaceGrid } from '../src/lib/cube.ts';
+import { lessons } from '../src/content/lessons.ts';
 
 const base = process.env.BASE_URL ?? 'http://127.0.0.1:4323';
 const key = 'namutree:cube:progress';
@@ -23,6 +25,23 @@ async function check(name, action) {
 const count = () => page.$eval('[data-move-count]', element => Number(element.textContent.split('/')[0].trim()));
 const ready = () => page.waitForFunction(() => !document.querySelector('[data-case]').disabled);
 try {
+  await check('visual preview: case selection shows the exact starting state without following playback', async () => {
+    for (const route of ['/learn/white-cross/', '/en/learn/middle-layer/', '/learn/finish/']) {
+      await go(route); await ready();
+      assert.ok(await page.$('[data-case-preview]'), '사례의 시작 그림이 있다');
+      const lesson = lessons.find(item => route.includes(`/${item.slug}/`));
+      for (const item of lesson.cases) {
+        await page.select('[data-case]', item.id);
+        const state = applyAlgorithm(applyAlgorithm(solvedCube(), item.targetSetup ?? ''), inverseAlgorithm(item.moves));
+        const faces = await page.$$eval('[data-preview-face]', groups => groups.map(group => ({ face: group.dataset.previewFace, colors: [...group.children].map(tile => [...tile.classList].find(name => name.startsWith('color-')).slice(6)) })));
+        assert.equal(faces.length, 3);
+        for (const face of faces) assert.deepEqual(face.colors, getFaceGrid(state, face.face), `${lesson.slug}.${item.id}.${face.face}`);
+      }
+      const before = await page.$eval('[data-case-preview]', element => element.innerHTML);
+      await page.click('[data-next]'); await ready();
+      assert.equal(await page.$eval('[data-case-preview]', element => element.innerHTML), before, '시작 그림은 시연 진행 중에도 고정된다');
+    }
+  });
   await check('journey: bilingual starting points follow the main course', async () => {
     for (const prefix of ['', '/en']) {
       await go(`${prefix}/`);
@@ -361,7 +380,7 @@ try {
     await page.screenshot({ path: 'artifacts/daisy-last-petal-320.png', fullPage: true });
     await page.setViewport({ width: 1280, height: 900 });
   });
-  await check('coaching: touch orbit preserves vertical page scrolling', async () => {
+  await check('coaching: two-axis touch orbit preserves scrolling outside the cube', async () => {
     const mobile = await browser.newPage();
     try {
       await mobile.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
@@ -379,11 +398,20 @@ try {
       assert.notEqual(await mobile.$eval('.cube-body', element => element.style.transform), initial);
       assert.equal(await mobile.$eval('.cube-body', element => element.innerHTML), stickers);
       const previousScroll = await mobile.evaluate(() => scrollY);
+      const previousAngle = await mobile.$eval('.cube-body', element => element.style.transform);
       await client.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
       for (let step = 1; step <= 6; step++) await client.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x, y: y - step * 15 }] });
       await client.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-      await mobile.waitForFunction(previous => scrollY > previous + 20, {}, previousScroll);
+      assert.notEqual(await mobile.$eval('.cube-body', element => element.style.transform), previousAngle, '세로 쓸기도 큐브의 관찰 각도를 바꾼다');
+      assert.equal(await mobile.evaluate(() => scrollY), previousScroll, '큐브 안에서 관찰할 때 페이지는 움직이지 않는다');
+      assert.equal(await mobile.$eval('.cube-body', element => element.innerHTML), stickers);
+      assert.ok((await mobile.$eval('[data-orbit]', element => getComputedStyle(element).touchAction)).includes('pinch-zoom'));
       assert.equal(await mobile.$eval('[data-orbit]', element => element.classList.contains('is-dragging')), false);
+      // 큐브 바깥의 본문에서는 원래의 한 손가락 페이지 스크롤을 유지한다.
+      await client.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 8, y }] });
+      for (let step = 1; step <= 6; step++) await client.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 8, y: y - step * 15 }] });
+      await client.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      await mobile.waitForFunction(previous => scrollY > previous + 20, {}, previousScroll);
       await client.detach();
     } finally { await mobile.close(); }
   });
@@ -486,6 +514,7 @@ try {
       await plain.setJavaScriptEnabled(false);
       await plain.goto(new URL('/en/learn/white-corners/', base).href, { waitUntil: 'networkidle0' });
       assert.ok(await plain.$eval('[data-case-steps]', element => element.children.length > 0));
+      assert.equal((await plain.$$('[data-case-preview] .preview-sticker')).length, 27);
       assert.ok(await plain.$eval('[data-algorithm]', element => element.children.length > 0));
       assert.ok((await plain.$eval('noscript', element => element.textContent)).includes('JavaScript'));
       assert.equal(await plain.$eval('[data-next]', element => element.disabled), true);

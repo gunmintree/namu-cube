@@ -7,7 +7,7 @@ const { plan, locale } = Astro.props;
 const ko = locale === 'ko';
 ---
 <section class="formula-guide" data-formula-guide aria-labelledby="formula-title">
-  <div class="formula-heading"><h2 id="formula-title" data-formula-title>{ko ? (plan.recurring ? '외울 기본 공식' : '이번 예시의 순서') : (plan.recurring ? 'The formula to learn' : 'This example’s moves')}</h2><button class="text-button" data-formula-copy disabled>{ko ? '공식 복사' : 'Copy formula'}</button></div>
+  <div class="formula-heading"><h2 id="formula-title" data-formula-title>{ko ? (plan.recurring ? '외울 기본 공식' : '이번 예시의 순서') : (plan.recurring ? 'The formula to learn' : 'This example’s moves')}</h2><div class="formula-actions"><button class="button secondary utility-button" data-bottom data-tilt="28" aria-pressed="false" disabled>{ko ? '아랫면 보기' : 'See the bottom'}</button><button class="button secondary utility-button" data-formula-copy disabled>{ko ? '공식 복사' : 'Copy formula'}</button></div></div>
   <p class="formula-summary" data-formula-summary>{plan.recurring ? (ko ? `이 예시에서 ${plan.formula.length}동작을 ${plan.repetitions}회` : `${plan.formula.length} moves, ${plan.repetitions} time(s) in this example`) : (ko ? `이 예시의 ${plan.formula.length}동작을 순서대로 해요.` : `Follow these ${plan.formula.length} moves in order.`)}</p>
   <div class="formula-chunks" data-algorithm role="list" aria-label={ko ? '회전 공식' : 'Move formula'}>
     {plan.chunks.map(chunk => <div class="formula-chunk"><div class="formula-tokens">{chunk.moves.map((move, i) => {

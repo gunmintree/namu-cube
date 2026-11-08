@@ -1,0 +1,25 @@
+---
+import type { Sticker } from '../lib/cube';
+import type { Locale } from '../content/lessons';
+import { getFaceGrid } from '../lib/cube';
+import { colorNames } from '../lib/presentation';
+const { state, locale, label } = Astro.props as { state: Sticker[]; locale: Locale; label: string };
+// 각 면을 바깥에서 읽는 행렬 순서를 유지하며 앞·오른쪽·윗면으로 투영한다.
+const faces = [
+  { face: 'U' as const, origin: [120, 22], column: [30, 15], row: [-30, 15] },
+  { face: 'F' as const, origin: [30, 67], column: [30, 15], row: [0, 30] },
+  { face: 'R' as const, origin: [120, 112], column: [30, -15], row: [0, 30] },
+];
+function points(layout: typeof faces[number], index: number) {
+  const column = index % 3, row = Math.floor(index / 3);
+  return [[0, 0], [1, 0], [1, 1], [0, 1]].map(([dx, dy]) => [
+    layout.origin[0] + (column + dx) * layout.column[0] + (row + dy) * layout.row[0],
+    layout.origin[1] + (column + dx) * layout.column[1] + (row + dy) * layout.row[1],
+  ].join(',')).join(' ');
+}
+---
+<svg class="case-preview-svg" viewBox="0 0 240 220" width="180" height="165" role="img" aria-label={label} data-case-preview>
+  <title data-preview-title>{label}</title>
+  {faces.map(layout => <g data-preview-face={layout.face}>{getFaceGrid(state, layout.face).map((color, index) => <polygon class={`preview-sticker color-${color}`} points={points(layout, index)}><title>{colorNames[locale][color]}</title></polygon>)}</g>)}
+  <g class="preview-labels" text-anchor="middle" aria-hidden="true"><text x="120" y="12">{locale === 'ko' ? '위' : 'Top'}</text><text x="55" y="200">{locale === 'ko' ? '앞' : 'Front'}</text><text x="185" y="200">{locale === 'ko' ? '오른쪽' : 'Right'}</text></g>
+</svg>

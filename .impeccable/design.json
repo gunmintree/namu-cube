@@ -681,12 +681,12 @@
       "css": ".ds-secondary{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:12px 22px;border:1px solid transparent;border-radius:var(--radius-input,8px);font-size:1rem;font-weight:620;line-height:1.5;cursor:pointer;white-space:nowrap;transition:background 150ms,transform 150ms;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);background:var(--color-card,#ffffff);color:var(--color-ink,#172b44);border-color:var(--color-field-edge,#6c7c90)}.ds-secondary:hover{background:var(--color-paper-2,#edf1f7)}.ds-secondary:active:not(:disabled){transform:translateY(1px)}.ds-secondary:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-secondary:disabled{opacity:.45;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary,.ds-secondary{transition-duration:0s}}"
     },
     {
-      "name": "텍스트 버튼",
+      "name": "작은 보조 버튼",
       "kind": "button",
-      "refersTo": "button-text",
-      "description": "실습을 보조하는 다시 보기·초기화.",
-      "html": "<button class=\"ds-text\">이 묶음 다시 보기</button>",
-      "css": ".ds-text{min-height:44px;border:0;background:transparent;color:var(--color-ink-2,#354b66);padding:8px 0;text-decoration:underline;text-underline-offset:.3em;font-size:.85rem;cursor:pointer;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-text:active:not(:disabled){transform:translateY(1px)}.ds-text:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-text:disabled{opacity:.45;cursor:not-allowed}"
+      "refersTo": "button-utility",
+      "description": "아랫면 보기·공식 복사·다시 보기·초기화·관찰 복원의 공통 보조 조작.",
+      "html": "<button class=\"ds-utility\">공식 복사</button>",
+      "css": ".ds-utility{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;border:1px solid var(--color-field-edge,#6c7c90);border-radius:8px;background:var(--color-card,#fff);color:var(--color-ink,#172b44);font:620 .85rem/1.5 var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);white-space:normal;cursor:pointer;}.ds-utility:hover{background:var(--color-paper-2,#edf1f7)}.ds-utility[aria-pressed=true]{background:var(--color-accent,#2549df);color:var(--color-accent-ink,#fff);border-color:var(--color-accent,#2549df)}.ds-utility:active:not(:disabled){transform:translateY(1px)}.ds-utility:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-utility:disabled{opacity:.45;cursor:not-allowed}"
     },
     {
       "name": "사례 선택",
