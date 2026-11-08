@@ -1,0 +1,786 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-08T06:24:28.151Z",
+  "title": "Design System: 차근차근 큐브",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "차가운 백색 작업면",
+        "canonical": "#f8fafd",
+        "tonalRamp": [
+          "oklch(from #f8fafd 15% c h)",
+          "oklch(from #f8fafd 25% c h)",
+          "oklch(from #f8fafd 35% c h)",
+          "oklch(from #f8fafd 45% c h)",
+          "oklch(from #f8fafd 55% c h)",
+          "oklch(from #f8fafd 65% c h)",
+          "oklch(from #f8fafd 80% c h)",
+          "oklch(from #f8fafd 95% c h)"
+        ]
+      },
+      "paper-secondary": {
+        "role": "neutral",
+        "displayName": "보조 작업면",
+        "canonical": "#edf1f7",
+        "tonalRamp": [
+          "oklch(from #edf1f7 15% c h)",
+          "oklch(from #edf1f7 25% c h)",
+          "oklch(from #edf1f7 35% c h)",
+          "oklch(from #edf1f7 45% c h)",
+          "oklch(from #edf1f7 55% c h)",
+          "oklch(from #edf1f7 65% c h)",
+          "oklch(from #edf1f7 80% c h)",
+          "oklch(from #edf1f7 95% c h)"
+        ]
+      },
+      "paper-tertiary": {
+        "role": "neutral",
+        "displayName": "도해의 중립 면",
+        "canonical": "#dce3ed",
+        "tonalRamp": [
+          "oklch(from #dce3ed 15% c h)",
+          "oklch(from #dce3ed 25% c h)",
+          "oklch(from #dce3ed 35% c h)",
+          "oklch(from #dce3ed 45% c h)",
+          "oklch(from #dce3ed 55% c h)",
+          "oklch(from #dce3ed 65% c h)",
+          "oklch(from #dce3ed 80% c h)",
+          "oklch(from #dce3ed 95% c h)"
+        ]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "조작 면",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(from #ffffff 15% c h)",
+          "oklch(from #ffffff 25% c h)",
+          "oklch(from #ffffff 35% c h)",
+          "oklch(from #ffffff 45% c h)",
+          "oklch(from #ffffff 55% c h)",
+          "oklch(from #ffffff 65% c h)",
+          "oklch(from #ffffff 80% c h)",
+          "oklch(from #ffffff 95% c h)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "본문 잉크",
+        "canonical": "#172b44",
+        "tonalRamp": [
+          "oklch(from #172b44 15% c h)",
+          "oklch(from #172b44 25% c h)",
+          "oklch(from #172b44 35% c h)",
+          "oklch(from #172b44 45% c h)",
+          "oklch(from #172b44 55% c h)",
+          "oklch(from #172b44 65% c h)",
+          "oklch(from #172b44 80% c h)",
+          "oklch(from #172b44 95% c h)"
+        ]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "설명 잉크",
+        "canonical": "#354b66",
+        "tonalRamp": [
+          "oklch(from #354b66 15% c h)",
+          "oklch(from #354b66 25% c h)",
+          "oklch(from #354b66 35% c h)",
+          "oklch(from #354b66 45% c h)",
+          "oklch(from #354b66 55% c h)",
+          "oklch(from #354b66 65% c h)",
+          "oklch(from #354b66 80% c h)",
+          "oklch(from #354b66 95% c h)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "보조 글자",
+        "canonical": "#53647a",
+        "tonalRamp": [
+          "oklch(from #53647a 15% c h)",
+          "oklch(from #53647a 25% c h)",
+          "oklch(from #53647a 35% c h)",
+          "oklch(from #53647a 45% c h)",
+          "oklch(from #53647a 55% c h)",
+          "oklch(from #53647a 65% c h)",
+          "oklch(from #53647a 80% c h)",
+          "oklch(from #53647a 95% c h)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "내용 구분선",
+        "canonical": "#cfd9e5",
+        "tonalRamp": [
+          "oklch(from #cfd9e5 15% c h)",
+          "oklch(from #cfd9e5 25% c h)",
+          "oklch(from #cfd9e5 35% c h)",
+          "oklch(from #cfd9e5 45% c h)",
+          "oklch(from #cfd9e5 55% c h)",
+          "oklch(from #cfd9e5 65% c h)",
+          "oklch(from #cfd9e5 80% c h)",
+          "oklch(from #cfd9e5 95% c h)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "행동 파랑",
+        "canonical": "#2549df",
+        "tonalRamp": [
+          "oklch(from #2549df 15% c h)",
+          "oklch(from #2549df 25% c h)",
+          "oklch(from #2549df 35% c h)",
+          "oklch(from #2549df 45% c h)",
+          "oklch(from #2549df 55% c h)",
+          "oklch(from #2549df 65% c h)",
+          "oklch(from #2549df 80% c h)",
+          "oklch(from #2549df 95% c h)"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "파랑 위 글자",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "oklch(from #ffffff 15% c h)",
+          "oklch(from #ffffff 25% c h)",
+          "oklch(from #ffffff 35% c h)",
+          "oklch(from #ffffff 45% c h)",
+          "oklch(from #ffffff 55% c h)",
+          "oklch(from #ffffff 65% c h)",
+          "oklch(from #ffffff 80% c h)",
+          "oklch(from #ffffff 95% c h)"
+        ]
+      },
+      "stage": {
+        "role": "neutral",
+        "displayName": "큐브 무대",
+        "canonical": "#e9eff8",
+        "tonalRamp": [
+          "oklch(from #e9eff8 15% c h)",
+          "oklch(from #e9eff8 25% c h)",
+          "oklch(from #e9eff8 35% c h)",
+          "oklch(from #e9eff8 45% c h)",
+          "oklch(from #e9eff8 55% c h)",
+          "oklch(from #e9eff8 65% c h)",
+          "oklch(from #e9eff8 80% c h)",
+          "oklch(from #e9eff8 95% c h)"
+        ]
+      },
+      "stage-deep": {
+        "role": "neutral",
+        "displayName": "무대 경계",
+        "canonical": "#cfdbec",
+        "tonalRamp": [
+          "oklch(from #cfdbec 15% c h)",
+          "oklch(from #cfdbec 25% c h)",
+          "oklch(from #cfdbec 35% c h)",
+          "oklch(from #cfdbec 45% c h)",
+          "oklch(from #cfdbec 55% c h)",
+          "oklch(from #cfdbec 65% c h)",
+          "oklch(from #cfdbec 80% c h)",
+          "oklch(from #cfdbec 95% c h)"
+        ]
+      },
+      "field-edge": {
+        "role": "neutral",
+        "displayName": "조작 경계",
+        "canonical": "#6c7c90",
+        "tonalRamp": [
+          "oklch(from #6c7c90 15% c h)",
+          "oklch(from #6c7c90 25% c h)",
+          "oklch(from #6c7c90 35% c h)",
+          "oklch(from #6c7c90 45% c h)",
+          "oklch(from #6c7c90 55% c h)",
+          "oklch(from #6c7c90 65% c h)",
+          "oklch(from #6c7c90 80% c h)",
+          "oklch(from #6c7c90 95% c h)"
+        ]
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "확인 초록",
+        "canonical": "#286242",
+        "tonalRamp": [
+          "oklch(from #286242 15% c h)",
+          "oklch(from #286242 25% c h)",
+          "oklch(from #286242 35% c h)",
+          "oklch(from #286242 45% c h)",
+          "oklch(from #286242 55% c h)",
+          "oklch(from #286242 65% c h)",
+          "oklch(from #286242 80% c h)",
+          "oklch(from #286242 95% c h)"
+        ]
+      },
+      "ink-on-cube": {
+        "role": "neutral",
+        "displayName": "스티커 위 글자",
+        "canonical": "#171c21",
+        "tonalRamp": [
+          "oklch(from #171c21 15% c h)",
+          "oklch(from #171c21 25% c h)",
+          "oklch(from #171c21 35% c h)",
+          "oklch(from #171c21 45% c h)",
+          "oklch(from #171c21 55% c h)",
+          "oklch(from #171c21 65% c h)",
+          "oklch(from #171c21 80% c h)",
+          "oklch(from #171c21 95% c h)"
+        ]
+      },
+      "cube-yellow": {
+        "role": "secondary",
+        "displayName": "큐브 노랑",
+        "canonical": "#f3dc52",
+        "tonalRamp": [
+          "oklch(from #f3dc52 15% c h)",
+          "oklch(from #f3dc52 25% c h)",
+          "oklch(from #f3dc52 35% c h)",
+          "oklch(from #f3dc52 45% c h)",
+          "oklch(from #f3dc52 55% c h)",
+          "oklch(from #f3dc52 65% c h)",
+          "oklch(from #f3dc52 80% c h)",
+          "oklch(from #f3dc52 95% c h)"
+        ]
+      },
+      "cube-white": {
+        "role": "secondary",
+        "displayName": "큐브 하양",
+        "canonical": "#fffefa",
+        "tonalRamp": [
+          "oklch(from #fffefa 15% c h)",
+          "oklch(from #fffefa 25% c h)",
+          "oklch(from #fffefa 35% c h)",
+          "oklch(from #fffefa 45% c h)",
+          "oklch(from #fffefa 55% c h)",
+          "oklch(from #fffefa 65% c h)",
+          "oklch(from #fffefa 80% c h)",
+          "oklch(from #fffefa 95% c h)"
+        ]
+      },
+      "cube-green": {
+        "role": "secondary",
+        "displayName": "큐브 초록",
+        "canonical": "#51ad80",
+        "tonalRamp": [
+          "oklch(from #51ad80 15% c h)",
+          "oklch(from #51ad80 25% c h)",
+          "oklch(from #51ad80 35% c h)",
+          "oklch(from #51ad80 45% c h)",
+          "oklch(from #51ad80 55% c h)",
+          "oklch(from #51ad80 65% c h)",
+          "oklch(from #51ad80 80% c h)",
+          "oklch(from #51ad80 95% c h)"
+        ]
+      },
+      "cube-blue": {
+        "role": "secondary",
+        "displayName": "큐브 파랑",
+        "canonical": "#6593d9",
+        "tonalRamp": [
+          "oklch(from #6593d9 15% c h)",
+          "oklch(from #6593d9 25% c h)",
+          "oklch(from #6593d9 35% c h)",
+          "oklch(from #6593d9 45% c h)",
+          "oklch(from #6593d9 55% c h)",
+          "oklch(from #6593d9 65% c h)",
+          "oklch(from #6593d9 80% c h)",
+          "oklch(from #6593d9 95% c h)"
+        ]
+      },
+      "cube-red": {
+        "role": "secondary",
+        "displayName": "큐브 빨강",
+        "canonical": "#e56652",
+        "tonalRamp": [
+          "oklch(from #e56652 15% c h)",
+          "oklch(from #e56652 25% c h)",
+          "oklch(from #e56652 35% c h)",
+          "oklch(from #e56652 45% c h)",
+          "oklch(from #e56652 55% c h)",
+          "oklch(from #e56652 65% c h)",
+          "oklch(from #e56652 80% c h)",
+          "oklch(from #e56652 95% c h)"
+        ]
+      },
+      "cube-orange": {
+        "role": "secondary",
+        "displayName": "큐브 주황",
+        "canonical": "#f0a353",
+        "tonalRamp": [
+          "oklch(from #f0a353 15% c h)",
+          "oklch(from #f0a353 25% c h)",
+          "oklch(from #f0a353 35% c h)",
+          "oklch(from #f0a353 45% c h)",
+          "oklch(from #f0a353 55% c h)",
+          "oklch(from #f0a353 65% c h)",
+          "oklch(from #f0a353 80% c h)",
+          "oklch(from #f0a353 95% c h)"
+        ]
+      },
+      "cube-line": {
+        "role": "secondary",
+        "displayName": "큐브 테두리",
+        "canonical": "#252c33",
+        "tonalRamp": [
+          "oklch(from #252c33 15% c h)",
+          "oklch(from #252c33 25% c h)",
+          "oklch(from #252c33 35% c h)",
+          "oklch(from #252c33 45% c h)",
+          "oklch(from #252c33 55% c h)",
+          "oklch(from #252c33 65% c h)",
+          "oklch(from #252c33 80% c h)",
+          "oklch(from #252c33 95% c h)"
+        ]
+      },
+      "dark-paper": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 차가운 백색 작업면",
+        "canonical": "#11171b",
+        "tonalRamp": [
+          "oklch(from #11171b 15% c h)",
+          "oklch(from #11171b 25% c h)",
+          "oklch(from #11171b 35% c h)",
+          "oklch(from #11171b 45% c h)",
+          "oklch(from #11171b 55% c h)",
+          "oklch(from #11171b 65% c h)",
+          "oklch(from #11171b 80% c h)",
+          "oklch(from #11171b 95% c h)"
+        ]
+      },
+      "dark-paper-secondary": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 보조 작업면",
+        "canonical": "#1b242a",
+        "tonalRamp": [
+          "oklch(from #1b242a 15% c h)",
+          "oklch(from #1b242a 25% c h)",
+          "oklch(from #1b242a 35% c h)",
+          "oklch(from #1b242a 45% c h)",
+          "oklch(from #1b242a 55% c h)",
+          "oklch(from #1b242a 65% c h)",
+          "oklch(from #1b242a 80% c h)",
+          "oklch(from #1b242a 95% c h)"
+        ]
+      },
+      "dark-paper-tertiary": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 도해의 중립 면",
+        "canonical": "#29343d",
+        "tonalRamp": [
+          "oklch(from #29343d 15% c h)",
+          "oklch(from #29343d 25% c h)",
+          "oklch(from #29343d 35% c h)",
+          "oklch(from #29343d 45% c h)",
+          "oklch(from #29343d 55% c h)",
+          "oklch(from #29343d 65% c h)",
+          "oklch(from #29343d 80% c h)",
+          "oklch(from #29343d 95% c h)"
+        ]
+      },
+      "dark-card": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 조작 면",
+        "canonical": "#182127",
+        "tonalRamp": [
+          "oklch(from #182127 15% c h)",
+          "oklch(from #182127 25% c h)",
+          "oklch(from #182127 35% c h)",
+          "oklch(from #182127 45% c h)",
+          "oklch(from #182127 55% c h)",
+          "oklch(from #182127 65% c h)",
+          "oklch(from #182127 80% c h)",
+          "oklch(from #182127 95% c h)"
+        ]
+      },
+      "dark-ink": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 본문 잉크",
+        "canonical": "#e7edf0",
+        "tonalRamp": [
+          "oklch(from #e7edf0 15% c h)",
+          "oklch(from #e7edf0 25% c h)",
+          "oklch(from #e7edf0 35% c h)",
+          "oklch(from #e7edf0 45% c h)",
+          "oklch(from #e7edf0 55% c h)",
+          "oklch(from #e7edf0 65% c h)",
+          "oklch(from #e7edf0 80% c h)",
+          "oklch(from #e7edf0 95% c h)"
+        ]
+      },
+      "dark-ink-secondary": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 설명 잉크",
+        "canonical": "#c0cbd2",
+        "tonalRamp": [
+          "oklch(from #c0cbd2 15% c h)",
+          "oklch(from #c0cbd2 25% c h)",
+          "oklch(from #c0cbd2 35% c h)",
+          "oklch(from #c0cbd2 45% c h)",
+          "oklch(from #c0cbd2 55% c h)",
+          "oklch(from #c0cbd2 65% c h)",
+          "oklch(from #c0cbd2 80% c h)",
+          "oklch(from #c0cbd2 95% c h)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 보조 글자",
+        "canonical": "#a4b1ba",
+        "tonalRamp": [
+          "oklch(from #a4b1ba 15% c h)",
+          "oklch(from #a4b1ba 25% c h)",
+          "oklch(from #a4b1ba 35% c h)",
+          "oklch(from #a4b1ba 45% c h)",
+          "oklch(from #a4b1ba 55% c h)",
+          "oklch(from #a4b1ba 65% c h)",
+          "oklch(from #a4b1ba 80% c h)",
+          "oklch(from #a4b1ba 95% c h)"
+        ]
+      },
+      "dark-rule": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 내용 구분선",
+        "canonical": "#3b4a54",
+        "tonalRamp": [
+          "oklch(from #3b4a54 15% c h)",
+          "oklch(from #3b4a54 25% c h)",
+          "oklch(from #3b4a54 35% c h)",
+          "oklch(from #3b4a54 45% c h)",
+          "oklch(from #3b4a54 55% c h)",
+          "oklch(from #3b4a54 65% c h)",
+          "oklch(from #3b4a54 80% c h)",
+          "oklch(from #3b4a54 95% c h)"
+        ]
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "어두운 화면 · 행동 파랑",
+        "canonical": "#9fb7ff",
+        "tonalRamp": [
+          "oklch(from #9fb7ff 15% c h)",
+          "oklch(from #9fb7ff 25% c h)",
+          "oklch(from #9fb7ff 35% c h)",
+          "oklch(from #9fb7ff 45% c h)",
+          "oklch(from #9fb7ff 55% c h)",
+          "oklch(from #9fb7ff 65% c h)",
+          "oklch(from #9fb7ff 80% c h)",
+          "oklch(from #9fb7ff 95% c h)"
+        ]
+      },
+      "dark-accent-ink": {
+        "role": "primary",
+        "displayName": "어두운 화면 · 파랑 위 글자",
+        "canonical": "#102044",
+        "tonalRamp": [
+          "oklch(from #102044 15% c h)",
+          "oklch(from #102044 25% c h)",
+          "oklch(from #102044 35% c h)",
+          "oklch(from #102044 45% c h)",
+          "oklch(from #102044 55% c h)",
+          "oklch(from #102044 65% c h)",
+          "oklch(from #102044 80% c h)",
+          "oklch(from #102044 95% c h)"
+        ]
+      },
+      "dark-stage": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 큐브 무대",
+        "canonical": "#1b2736",
+        "tonalRamp": [
+          "oklch(from #1b2736 15% c h)",
+          "oklch(from #1b2736 25% c h)",
+          "oklch(from #1b2736 35% c h)",
+          "oklch(from #1b2736 45% c h)",
+          "oklch(from #1b2736 55% c h)",
+          "oklch(from #1b2736 65% c h)",
+          "oklch(from #1b2736 80% c h)",
+          "oklch(from #1b2736 95% c h)"
+        ]
+      },
+      "dark-stage-deep": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 무대 경계",
+        "canonical": "#2e4058",
+        "tonalRamp": [
+          "oklch(from #2e4058 15% c h)",
+          "oklch(from #2e4058 25% c h)",
+          "oklch(from #2e4058 35% c h)",
+          "oklch(from #2e4058 45% c h)",
+          "oklch(from #2e4058 55% c h)",
+          "oklch(from #2e4058 65% c h)",
+          "oklch(from #2e4058 80% c h)",
+          "oklch(from #2e4058 95% c h)"
+        ]
+      },
+      "dark-field-edge": {
+        "role": "neutral",
+        "displayName": "어두운 화면 · 조작 경계",
+        "canonical": "#718390",
+        "tonalRamp": [
+          "oklch(from #718390 15% c h)",
+          "oklch(from #718390 25% c h)",
+          "oklch(from #718390 35% c h)",
+          "oklch(from #718390 45% c h)",
+          "oklch(from #718390 55% c h)",
+          "oklch(from #718390 65% c h)",
+          "oklch(from #718390 80% c h)",
+          "oklch(from #718390 95% c h)"
+        ]
+      },
+      "dark-success": {
+        "role": "secondary",
+        "displayName": "어두운 화면 · 확인 초록",
+        "canonical": "#a3d8b7",
+        "tonalRamp": [
+          "oklch(from #a3d8b7 15% c h)",
+          "oklch(from #a3d8b7 25% c h)",
+          "oklch(from #a3d8b7 35% c h)",
+          "oklch(from #a3d8b7 45% c h)",
+          "oklch(from #a3d8b7 55% c h)",
+          "oklch(from #a3d8b7 65% c h)",
+          "oklch(from #a3d8b7 80% c h)",
+          "oklch(from #a3d8b7 95% c h)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "홈의 큰 제목",
+        "purpose": "처음 시작할 행동. 680px 이하에서는 별도의 clamp를 적용한다."
+      },
+      "lesson-title": {
+        "displayName": "수업 제목",
+        "purpose": "현재 수업 목표. 680px 이하 1.8rem."
+      },
+      "section": {
+        "displayName": "구역 제목",
+        "purpose": "전체 수업 순서와 정보 페이지."
+      },
+      "lesson-order": {
+        "displayName": "큰 단계 번호",
+        "purpose": "실제 본 수업의 순서."
+      },
+      "lead": {
+        "displayName": "도입 설명",
+        "purpose": "시작 행동을 설명하는 문장."
+      },
+      "body": {
+        "displayName": "기본 본문",
+        "purpose": "밝은 화면 무게 400, 어두운 화면 무게 350."
+      },
+      "instruction": {
+        "displayName": "수행 지시",
+        "purpose": "잡는 방향과 동작을 읽는 넓은 줄간격."
+      },
+      "workspace-title": {
+        "displayName": "실습 제목",
+        "purpose": "고르기·잡기·따라 하기의 작업 이름."
+      },
+      "lesson-row-title": {
+        "displayName": "수업 행 제목",
+        "purpose": "목록에서 찾는 수업 이름. 모바일 1rem."
+      },
+      "control": {
+        "displayName": "주요 조작",
+        "purpose": "기본 버튼. 모바일 재생 버튼은 .85rem."
+      },
+      "support": {
+        "displayName": "보조 설명",
+        "purpose": "설명과 링크의 대표 크기. 문맥별 literal 변형이 있다."
+      },
+      "compact-label": {
+        "displayName": "작은 조작·기록",
+        "purpose": "관찰 조작과 보조 상태."
+      },
+      "caption": {
+        "displayName": "도해 캡션",
+        "purpose": "그림·상태의 부가 정보."
+      },
+      "move": {
+        "displayName": "공식 기호",
+        "purpose": "기본 공식의 고정폭 기호. 1000px 이하 1.75rem."
+      },
+      "active-move": {
+        "displayName": "다음 동작",
+        "purpose": "수행할 한 회전. 종료 표시는 1.25rem."
+      },
+      "dock-move": {
+        "displayName": "하단 참고 공식",
+        "purpose": "시연 밖에서 읽는 참고 기호."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "control-transition",
+        "value": "150ms",
+        "purpose": "버튼 배경과 눌림 피드백. 움직임 감소 설정에서는 전환을 제거한다."
+      },
+      {
+        "name": "cube-slow",
+        "value": "1000ms",
+        "purpose": "천천히 재생하는 한 회전."
+      },
+      {
+        "name": "cube-normal",
+        "value": "500ms",
+        "purpose": "보통 속도의 한 회전."
+      },
+      {
+        "name": "cube-easing",
+        "value": "cubic-bezier(.4,0,.2,1)",
+        "purpose": "상태 데이터 큐브 회전의 완급."
+      },
+      {
+        "name": "between-moves",
+        "value": "700ms",
+        "purpose": "자동 재생의 다음 동작 전 대기."
+      },
+      {
+        "name": "reduced-cube-motion",
+        "value": "0ms",
+        "purpose": "움직임 감소 설정은 애니메이션 없이 회전 결과를 표시한다."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-layout",
+        "value": "1000px"
+      },
+      {
+        "name": "compact-gutter",
+        "value": "900px"
+      },
+      {
+        "name": "stacked-lesson",
+        "value": "680px"
+      },
+      {
+        "name": "mobile-gutter",
+        "value": "600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "주요 버튼",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "시작·다음 동작·직접 확인의 주요 행동.",
+      "html": "<button class=\"ds-primary\">한 동작</button>",
+      "css": ".ds-primary{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:12px 22px;border:1px solid transparent;border-radius:var(--radius-input,8px);font-size:1rem;font-weight:620;line-height:1.5;cursor:pointer;white-space:nowrap;transition:background 150ms,transform 150ms;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);background:var(--color-accent,#2549df);color:var(--color-accent-ink,#ffffff)}.ds-primary:hover{background:var(--color-ink,#172b44);color:var(--color-card,#ffffff)}.ds-primary:active:not(:disabled){transform:translateY(1px)}.ds-primary:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-primary:disabled{opacity:.45;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary,.ds-secondary{transition-duration:0s}}"
+    },
+    {
+      "name": "보조 버튼",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "재생·이전 동작 등의 보조 조작.",
+      "html": "<button class=\"ds-secondary\">묶음 재생</button>",
+      "css": ".ds-secondary{min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:12px 22px;border:1px solid transparent;border-radius:var(--radius-input,8px);font-size:1rem;font-weight:620;line-height:1.5;cursor:pointer;white-space:nowrap;transition:background 150ms,transform 150ms;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);background:var(--color-card,#ffffff);color:var(--color-ink,#172b44);border-color:var(--color-field-edge,#6c7c90)}.ds-secondary:hover{background:var(--color-paper-2,#edf1f7)}.ds-secondary:active:not(:disabled){transform:translateY(1px)}.ds-secondary:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-secondary:disabled{opacity:.45;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary,.ds-secondary{transition-duration:0s}}"
+    },
+    {
+      "name": "텍스트 버튼",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "실습을 보조하는 다시 보기·초기화.",
+      "html": "<button class=\"ds-text\">이 묶음 다시 보기</button>",
+      "css": ".ds-text{min-height:44px;border:0;background:transparent;color:var(--color-ink-2,#354b66);padding:8px 0;text-decoration:underline;text-underline-offset:.3em;font-size:.85rem;cursor:pointer;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-text:active:not(:disabled){transform:translateY(1px)}.ds-text:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-text:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "사례 선택",
+      "kind": "input",
+      "refersTo": "select",
+      "description": "시작 조건과 연결된 기본 선택 상자.",
+      "html": "<label class=\"ds-case-label\" for=\"ds-case\">내 큐브와 같은 사례 고르기</label><select class=\"ds-select\" id=\"ds-case\"><option>흰색이 위에 있어요</option><option>흰색이 옆에 있어요</option></select>",
+      "css": ".ds-case-label{display:block;margin-bottom:12px;font-weight:650;color:var(--color-ink,#172b44);font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-select{width:100%;max-width:100%;min-height:46px;border:1px solid var(--color-field-edge,#6c7c90);border-radius:var(--radius-input,8px);background:var(--color-card,#ffffff);color:var(--color-ink,#172b44);padding:10px 32px 10px 12px;font-size:1.0625rem;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-select:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}"
+    },
+    {
+      "name": "일곱 단계 탐색",
+      "kind": "nav",
+      "description": "실제 본 수업 순서와 현재 단계를 보여준다.",
+      "html": "<nav class=\"ds-progress\" aria-label=\"학습 단계\"><a href=\"#ds-step-1\" aria-label=\"흰 십자\" aria-current=\"step\"><span>1</span><span class=\"ds-step-name\">흰 십자</span></a><a href=\"#ds-step-2\" aria-label=\"흰 꼭짓점\"><span>2</span><span class=\"ds-step-name\">흰 꼭짓점</span></a><a href=\"#ds-step-3\" aria-label=\"가운데 층\"><span>3</span><span class=\"ds-step-name\">가운데 층</span></a><a href=\"#ds-step-4\" aria-label=\"노란 십자\"><span>4</span><span class=\"ds-step-name\">노란 십자</span></a><a href=\"#ds-step-5\" aria-label=\"노란 모서리\"><span>5</span><span class=\"ds-step-name\">노란 모서리</span></a><a href=\"#ds-step-6\" aria-label=\"노란 꼭짓점\"><span>6</span><span class=\"ds-step-name\">노란 꼭짓점</span></a><a href=\"#ds-step-7\" aria-label=\"마지막 정렬\"><span>7</span><span class=\"ds-step-name\">마지막 정렬</span></a></nav>",
+      "css": ".ds-progress{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-progress a{display:flex;align-items:center;gap:10px;padding:10px;text-decoration:none;border-bottom:2px solid var(--color-rule,#cfd9e5);font-size:.78rem;min-height:48px;color:var(--color-muted,#53647a)}.ds-progress a[aria-current]{color:var(--color-accent,#2549df);border-color:var(--color-accent,#2549df);font-weight:700}.ds-progress a:hover{background:var(--color-paper-2,#edf1f7)}.ds-progress a:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}@media(max-width:1000px){.ds-step-name{display:none}.ds-progress a{justify-content:center}}@media(max-width:680px){.ds-progress{gap:4px}.ds-progress a{padding:8px 4px;font-size:.85rem}}"
+    },
+    {
+      "name": "관찰 방향 선택",
+      "kind": "button",
+      "refersTo": "view-choice",
+      "description": "관찰 방향만 바꾸며 선택을 aria-pressed로 알린다.",
+      "html": "<div class=\"ds-views\"><button aria-pressed=\"true\">앞과 오른쪽</button><button aria-pressed=\"false\">앞과 왼쪽</button></div>",
+      "css": ".ds-views{display:flex;gap:8px;flex-wrap:wrap}.ds-views button{min-height:44px;border:1px solid var(--color-field-edge,#6c7c90);border-radius:var(--radius-input,8px);padding:8px 12px;font-size:.8rem;background:var(--color-card,#ffffff);color:var(--color-ink,#172b44);cursor:pointer;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-views button[aria-pressed=true]{background:var(--color-accent,#2549df);color:var(--color-accent-ink,#ffffff);border-color:var(--color-accent,#2549df)}.ds-views button:active:not(:disabled){transform:translateY(1px)}.ds-views button:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-views button:disabled{opacity:.45;cursor:not-allowed}"
+    },
+    {
+      "name": "실습 작업면",
+      "kind": "card",
+      "refersTo": "cube-stage",
+      "description": "큐브·공식·확인 지점을 묶는 무대의 표면과 제목.",
+      "html": "<section class=\"ds-stage\"><div class=\"ds-practice-heading\"><h2><span class=\"ds-task-number\">3</span>한 묶음씩 따라 해요</h2><p>화면은 연습 예시예요.</p></div><div class=\"ds-formula\" aria-label=\"공식\"><b class=\"ds-current\">R</b><b>U</b><b>R′</b><b>U′</b></div></section>",
+      "css": ".ds-stage{background:var(--color-stage,#e9eff8);color:var(--color-ink,#172b44);border-radius:var(--radius-card,16px);padding:24px;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-practice-heading{padding-bottom:16px;border-bottom:1px solid var(--color-stage-deep,#cfdbec)}.ds-practice-heading h2{display:flex;align-items:baseline;gap:12px;margin:0;font-size:1.125rem;line-height:1.5;font-weight:700;letter-spacing:-.025em}.ds-task-number{display:inline-grid;place-items:center;flex:0 0 1.7em;height:1.7em;background:var(--color-card,#ffffff);color:var(--color-accent,#2549df);border-radius:4px;font-size:.8em}.ds-practice-heading p{margin:8px 0 0;font-size:.8rem;color:var(--color-ink-2,#354b66)}.ds-formula{display:flex;gap:4px;margin-top:16px}.ds-formula b{display:grid;place-items:center;min-height:56px;flex:0 0 3.125rem;padding-block:8px;font:700 2rem/1.2 var(--font-mono,ui-monospace,Consolas,monospace)}.ds-formula .ds-current{border-radius:4px;background:var(--color-accent,#2549df);color:var(--color-accent-ink,#ffffff)}@media(max-width:1000px){.ds-formula b{flex-basis:2.125rem;font-size:1.75rem}}@media(max-width:680px){.ds-stage{padding:18px}.ds-formula b{min-height:48px}}"
+    },
+    {
+      "name": "목표 흰 십자",
+      "kind": "custom",
+      "description": "관계없는 모서리 칸은 중립색으로 낮춘 목표 아랫면.",
+      "html": "<figure class=\"ds-goal\" aria-label=\"목표 아랫면: 흰 십자\"><div><span class=\"ds-unimportant\"></span><span class=\"ds-white\"></span><span class=\"ds-unimportant\"></span><span class=\"ds-white\"></span><span class=\"ds-white\"></span><span class=\"ds-white\"></span><span class=\"ds-unimportant\"></span><span class=\"ds-white\"></span><span class=\"ds-unimportant\"></span></div><figcaption>아랫면</figcaption></figure>",
+      "css": ".ds-goal{margin:0;text-align:center;font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-goal>div{display:grid;grid-template-columns:repeat(3,25px);gap:2px;margin-bottom:8px}.ds-goal span{height:25px;border:1px solid var(--cube-line,#252c33);border-radius:2px}.ds-goal .ds-white{background:var(--cube-D,#fffefa)}.ds-goal .ds-unimportant{background:var(--color-paper-3,#dce3ed);border-color:var(--color-rule,#cfd9e5)}.ds-goal figcaption{font-size:.75rem;color:var(--color-muted,#53647a)}@media(max-width:680px){.ds-goal>div{grid-template-columns:repeat(3,19px)}.ds-goal span{height:19px}}"
+    },
+    {
+      "name": "막힘 복구",
+      "kind": "custom",
+      "refersTo": "recovery",
+      "description": "native details 안에서 조건·방향·진행 위치를 다시 확인한다.",
+      "html": "<details class=\"ds-recovery\"><summary>막혔다면, 여기서 다시 확인해요</summary><div class=\"ds-recovery-content\"><p>도움말을 펼치면 시연이 멈춰요. 돌리던 한 동작은 끝낸 뒤 멈춰요.</p><section><h3>화면과 내 큐브가 달라요</h3><p>이번에 찾는 조각의 색과 주변 가운데 색을 비교하고, 사례와 잡는 방향을 다시 확인해요.</p><a href=\"#ds-case\">사례와 시작 조건 확인하기</a></section></div></details>",
+      "css": ".ds-recovery{padding-inline:24px;background:var(--color-paper-2,#edf1f7);color:var(--color-ink,#172b44);border-radius:var(--radius-card,16px);font-family:var(--font-body,'NamuSansSubset','Apple SD Gothic Neo','Malgun Gothic',sans-serif);}.ds-recovery summary{min-height:48px;padding-block:20px;cursor:pointer;font-size:1rem;font-weight:620}.ds-recovery summary:hover{color:var(--color-accent,#2549df)}.ds-recovery summary:focus-visible,.ds-recovery a:focus-visible{outline:3px solid var(--color-focus,#2549df);outline-offset:4px}.ds-recovery:not([open])>.ds-recovery-content{display:none}.ds-recovery-content{max-width:75ch;padding-bottom:20px;color:var(--color-ink-2,#354b66);line-height:1.85}.ds-recovery-content>p{margin:0;font-size:.85rem;color:var(--color-muted,#53647a)}.ds-recovery section{margin-top:24px;padding-top:24px;border-top:1px solid var(--color-rule,#cfd9e5)}.ds-recovery h3{margin:0 0 8px;font-size:1.1rem;font-weight:700;letter-spacing:-.025em}.ds-recovery section p{margin:0;font-size:.94rem}.ds-recovery a{display:inline-block;padding-block:12px;color:inherit;font-size:.875rem;font-weight:600;text-underline-offset:.25em}.ds-recovery a:hover{color:var(--color-accent,#2549df)}@media(max-width:680px){.ds-recovery{padding-inline:16px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "단계별 실습 작업표",
+    "overview": "차가운 백색 작업면, 짙은 잉크, 파란 행동색과 가는 경계로 읽기와 조작을 연결한다. 큰 수업 번호와 목표 도해, 짧은 지시문이 현재 할 일을 밝힌다. 앞선 안내판의 명료함과 상태 기반 큐브는 유지하면서, 사례 고르기·잡기·따라 하기·실물 확인이 같은 순서로 반복되는 체계로 정리했다.\n\n어린 독자도 보호자 없이 혼자 읽는 매뉴얼이다. 한국어·영어, 모바일, 키보드, 움직임 감소 설정을 동일한 제품 제약으로 다룬다. 시각 자산은 CSS 3D와 상태 데이터에서 만든 도해이며 새 래스터를 사용하지 않았다. 실제 초보자의 이해도·성공률·소요 시간은 아직 측정하지 않았다.",
+    "keyCharacteristics": [
+      "차가운 백색과 짙은 잉크, 파란 행동색",
+      "실제 상태 데이터로 그린 3D 큐브와 층별·목표 도해",
+      "학습 순서와 일치하는 번호, 준비에서 확인으로 이어지는 위계",
+      "필요한 설명을 펼치는 native details와 다시 확인할 경로",
+      "시연과 실물 확인을 구분하는 직접적인 양언어 문구"
+    ],
+    "rules": [
+      {
+        "name": "The Meaningful Color Rule",
+        "body": "큐브 색을 다른 의미의 상태 표시로 임의 전용하지 않는다.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Instruction Rule",
+        "body": "회전 기호 밖의 설명은 일반 글꼴과 문장으로 읽히게 하고, 작은 캡션이 수행 지시를 대신하지 않게 한다.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ordered Work Rule",
+        "body": "번호는 실제 본 수업 순서 또는 고르기·잡기·따라 하기·확인의 작업 순서를 나타내며 장식용 순위를 만들지 않는다.",
+        "section": "layout"
+      },
+      {
+        "name": "The Real Cube Check Rule",
+        "body": "시연 종료와 실물 완료를 구분하고, 독자가 실물을 확인한 행동만 학습 완료로 기록한다.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do 실제 큐브 상태와 지시문·목표 도해를 일치시킨다.",
+      "Do 현재 단계와 다음 행동을 글자·위치·상태 표시로 함께 알린다.",
+      "Do 고르기·잡기·따라 하기·실물 확인 순서를 두 언어와 모바일에서도 유지한다.",
+      "Do 회전 기호 밖의 설명은 일반 글꼴로 쓰고 키보드 초점과 움직임 감소 동작을 유지한다.",
+      "Do 막혔을 때 시작 조건·잡는 방향·진행 위치를 다시 확인할 경로를 제공한다."
+    ],
+    "donts": [
+      "Don't 본문·목록·버튼에 큐브의 접지 그림자를 복제한다.",
+      "Don't 보호자가 옆에 있다는 전제로 설명한다.",
+      "Don't 색만으로 조각 위치나 완료 상태를 설명한다.",
+      "Don't 시연 재생 완료를 실물 완성으로 자동 처리한다.",
+      "Don't 자기 확인에 따른 시작 지점 안내를 실물 인식·진단으로 표현한다.",
+      "Don't 사용자 연구 없이 이해도·성공률·완성 시간의 개선을 사실로 기록한다."
+    ]
+  }
+}
