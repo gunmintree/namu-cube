@@ -12,7 +12,8 @@
         "preview": "astro preview --host 127.0.0.1 --port 4323",
         "check": "astro check",
         "test": "node --experimental-strip-types --test tests/*.test.ts",
-        "test:site": "node scripts/check-site.mjs",
+        "render:cases": "node scripts/render-case-previews.mjs",
+        "test:site": "node scripts/render-case-previews.mjs --check && node scripts/check-site.mjs",
         "test:browser": "node scripts/browser-check.mjs"
     },
     "dependencies": {

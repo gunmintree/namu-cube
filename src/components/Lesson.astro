@@ -26,37 +26,39 @@ const goalState = lesson.slug === 'finish' ? solvedCube() : target;
 const data = JSON.stringify({ lesson, locale, slugs: allLessons.map(l => l.slug) }).replace(/</g, '\\u003c');
 ---
 <div class="container lesson-page" data-lesson>
-  <div class="lesson-topline"><a class="text-link" href={`${base}/`}>{ko ? '모든 단계' : 'All lessons'}</a><span>{supplementary ? (ko ? '보조 설명' : 'Reference') : (ko ? `${index + 1} / ${lessons.length} 단계` : `Step ${index + 1} of ${lessons.length}`)}</span></div>
+  <div class="lesson-topline"><a class="button secondary utility-button" href={`${base}/`}>{ko ? '모든 단계' : 'All lessons'}</a><span>{supplementary ? (ko ? '보조 설명' : 'Reference') : (ko ? `${index + 1} / ${lessons.length} 단계` : `Step ${index + 1} of ${lessons.length}`)}</span></div>
   <nav class="lesson-progress" aria-label={ko ? '학습 단계' : 'Learning steps'}>{lessons.map((item, i) => <a href={`${base}/learn/${item.slug}/`} aria-current={item.slug === lesson.slug ? 'step' : undefined} aria-label={text(item.title, locale)} title={text(item.title, locale)}><span>{i + 1}</span><span class="step-name">{text(item.shortTitle, locale)}</span></a>)}</nav>
   <div class="lesson-heading"><div class="lesson-title">{!supplementary && <span class="lesson-order" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>}<div><h1>{text(lesson.title, locale)}</h1><p>{text(lesson.goal, locale)}</p></div></div>{!supplementary && <figure class="goal-preview" aria-label={ko ? `목표 ${faceLabel}: ${text(lesson.goal, locale)}` : `Goal ${faceLabel}: ${text(lesson.goal, locale)}`}><div class="face-grid">{getFaceGrid(goalState, face).map((color, i) => <span class={lesson.slug === 'white-cross' && [0, 2, 6, 8].includes(i) ? 'goal-unimportant' : `color-${color}`}></span>)}</div><figcaption>{faceLabel}</figcaption></figure>}</div>
   {lesson.slug !== 'finish' && <p class="lesson-intro">{text(lesson.intro, locale)}</p>}
-  {lesson.slug === 'white-cross' && <div class="cross-setup"><details class="cross-start"><summary>{ko ? '흰 십자를 만드는 세 가지 순서' : 'Three steps to the white cross'}</summary><ol><li><strong>{ko ? '흰 조각을 위로' : 'Gather white edges'}</strong><span>{ko ? '흰색이 있는 두 색 조각을 노란 가운데 둘레에 모아요.' : 'Gather white edges around the yellow center.'}</span></li><li><strong>{ko ? '옆 색을 가운데와' : 'Match the side color'}</strong><span>{ko ? '윗면만 돌려 옆 색과 가운데 색을 맞춰요.' : 'Turn the top to match the edge to its side center.'}</span></li><li><strong>{ko ? '반 바퀴 돌려 아래로' : 'Half a turn down'}</strong><span>{ko ? '맞춘 면을 반 바퀴 돌려 흰색을 아래로 보내요.' : 'Turn that face halfway to bring white down.'}</span></li></ol></details><a class="text-link" href={`${base}/learn/daisy/`}>{ko ? '흰 조각이 흩어져 있다면, 모으는 방법 보기' : 'White pieces scattered? See how to gather them'}</a></div>}
   <section class="lesson-preparation" aria-label={ko ? '시연 전 준비' : 'Prepare before the demonstration'}>
     <div class="case-choice" id="choose-case" tabindex="-1">
-      <h2><span class="task-number" aria-hidden="true">1</span><label for="case-choice">{ko ? '내 큐브와 같은 사례 고르기' : 'Choose a case for your cube'}</label></h2>
+      <h2><span class="task-number" aria-hidden="true">1</span><label for="case-choice">{ko ? '내 큐브에 맞는 사례' : 'Choose your starting case'}</label></h2>
       <p class="starting-condition"><strong>{ko ? '시작 전 확인' : 'Before starting'}</strong>{text(guide.before, locale)}</p>
-      <select id="case-choice" data-case disabled>{lesson.cases.map(c => <option value={c.id}>{text(c.title, locale)}</option>)}</select>
-      <figure class="case-preview"><CasePreview state={initial} locale={locale} label={`${ko ? '시작 예시' : 'Starting example'}: ${text(first.title, locale)}`} /><figcaption><p class="case-when" data-case-when>{text(first.when, locale)}</p><p class="case-preview-note">{ko ? '찾는 조각과 주변 가운데 색을 비교해요. 전체 색 배치는 달라도 돼요.' : 'Compare the chosen piece and nearby centers. The whole pattern can differ.'}</p></figcaption></figure>
+      <div class="case-layout">
+        <figure class="case-preview"><CasePreview slug={lesson.slug} caseId={first.id} label={`${ko ? '시작 예시의 위·앞·오른쪽 면' : 'Top, front and right of the starting example'}: ${text(first.title, locale)}`} /><figcaption>{ko ? '시작 모습' : 'Starting view'}</figcaption></figure>
+        <div class="case-selection"><select id="case-choice" data-case disabled>{lesson.cases.map(c => <option value={c.id}>{text(c.title, locale)}</option>)}</select><div class="case-description"><p class="case-when" data-case-when>{text(first.when, locale)}</p><p class="case-preview-note">{ko ? '찾는 조각과 가운데 색을 비교해요. 나머지 색은 달라도 돼요.' : 'Compare your piece and its centers. Other colors can differ.'}</p></div></div>
+        <div class="hold-instruction"><h3>{ko ? '잡는 방향' : 'How to hold it'}</h3><p data-case-hold>{text(first.hold, locale)}</p>{lesson.slug === 'white-cross' && <a class="button secondary utility-button case-help" href={`${base}/learn/daisy/`}>{ko ? '흰 조각 모으기 도움말' : 'Help gathering white edges'}</a>}</div>
+      </div>
     </div>
-    <div class="hold-instruction"><h2><span class="task-number" aria-hidden="true">2</span>{ko ? '이렇게 잡아요' : 'Hold it like this'}</h2><p data-case-hold>{text(first.hold, locale)}</p><a class="text-link" href="#cube-practice">{ko ? '준비됐어요, 시연 보기' : 'Ready, see the demonstration'}</a></div>
   </section>
   <div class="lesson-workspace">
     <div class="lesson-visual" id="cube-practice" tabindex="-1">
-      <div class="practice-heading"><h2><span class="task-number" aria-hidden="true">3</span>{ko ? '한 묶음씩 따라 해요' : 'Follow one group at a time'}</h2><p>{ko ? '화면은 연습 예시예요.' : 'The screen is a practice example.'}</p></div>
+      <div class="practice-heading"><h2><span class="task-number" aria-hidden="true">2</span>{ko ? '한 묶음씩 따라 해요' : 'Follow one group at a time'}</h2></div>
       <Formula plan={practice} locale={locale} />
+      <div class="cube-view-toolbar"><span>{ko ? '예시 큐브' : 'Example cube'}</span><div><button class="button secondary utility-button" data-bottom data-tilt="28" aria-pressed="false" disabled>{ko ? '아랫면 보기' : 'See the bottom'}</button><button class="button secondary utility-button" data-view-reset disabled>{ko ? '기본 방향' : 'Reset view'}</button></div></div>
       <Cube state={initial} locale={locale} interactive />
-      <p class="cube-gesture-hint" id="view-help">{ko ? '큐브 안에서 상하·좌우로 끌어 둘러봐요. 페이지는 큐브 바깥에서 스크롤해요. 방향키로도 볼 수 있어요.' : 'Drag inside the cube to look up, down, left, or right. Scroll the page outside the cube. Arrow keys also work.'}</p>
-      <div class="checkpoint-status" aria-live="polite" aria-atomic="true"><strong data-checkpoint-title>{text(first.checkpoints[0].title, locale)}</strong><p data-checkpoint-copy>{text(first.when, locale)}</p></div>
+      <p class="cube-gesture-hint" id="view-help">{ko ? '큐브 안은 끌어 돌리기, 바깥은 스크롤. 방향키로도 관찰해요.' : 'Drag the cube to turn it. Scroll outside it. Arrow keys also work.'}</p>
       <div class="player-status" aria-live="polite" aria-atomic="true"><b class="active-move" data-active-move>{first.moves.split(' ')[0].replace("'", '′')}</b><div><span class="routine-position" data-routine-position>{ko ? '다음 동작' : 'Next move'}</span><strong data-move-copy>{ko ? '한 동작씩 돌려보세요.' : 'Watch one move at a time.'}</strong></div><span data-move-count>0 / {first.moves.trim().split(/\s+/).filter(Boolean).length}</span></div>
       <div class="player-controls">
         <button class="button secondary icon-control" data-previous disabled aria-label={ko ? '이전 예시 동작' : 'Previous example move'}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <button class="button primary" data-next disabled>{ko ? '한 동작' : 'Next move'}</button>
         <button class="button secondary" data-play disabled>{ko ? '묶음 재생' : 'Play group'}</button>
       </div>
-      <div class="replay-controls"><button class="button secondary utility-button" data-replay-group disabled>{ko ? '이 묶음 다시 보기' : 'Replay this group'}</button><span>{ko ? '다시 보기는 화면만 되돌려요.' : 'Replay rewinds only the screen.'}</span></div>
-      <div class="player-options"><button class="button secondary utility-button" data-reset disabled>{ko ? '예시 처음부터' : 'Reset example'}</button><label>{ko ? '속도' : 'Speed'} <select data-speed disabled><option value="1000">{ko ? '천천히' : 'Slow'}</option><option value="500">{ko ? '보통' : 'Normal'}</option></select></label></div>
+      <div class="player-options"><div class="replay-controls"><button class="button secondary utility-button" data-replay-group disabled>{ko ? '묶음 다시 보기' : 'Replay group'}</button><button class="button secondary utility-button" data-reset disabled>{ko ? '처음부터' : 'Reset example'}</button></div><label>{ko ? '속도' : 'Speed'} <select data-speed disabled><option value="1000">{ko ? '천천히' : 'Slow'}</option><option value="500">{ko ? '보통' : 'Normal'}</option></select></label></div>
+      <p class="playback-note">{ko ? '다시 보기와 처음부터는 화면만 되돌려요.' : 'Replay and reset rewind only the screen.'}</p>
+      <div class="checkpoint-status" aria-live="polite" aria-atomic="true" hidden><strong data-checkpoint-title>{text(first.checkpoints[0].title, locale)}</strong><p data-checkpoint-copy>{text(first.when, locale)}</p></div>
       <p class="demo-complete" data-demo-complete role="status" hidden>{ko ? '예시의 여섯 면이 맞았어요. 실물도 확인한 뒤 완료해요.' : 'All six example faces are solved. Check your real cube before finishing.'}</p>
-      <details class="view-disclosure"><summary>{ko ? '큐브의 다른 쪽 보기' : 'See another side'}</summary><div class="orbit-help"><button class="button secondary utility-button" data-view-reset disabled>{ko ? '설명 방향으로' : 'Instruction view'}</button></div><div class="view-controls" aria-label={ko ? '큐브 관찰 방향' : 'View the cube'}>
+      <details class="view-disclosure"><summary>{ko ? '큐브의 다른 쪽 보기' : 'See another side'}</summary><div class="view-controls" aria-label={ko ? '큐브 관찰 방향' : 'View the cube'}>
         <button data-view="-32" aria-pressed="true" disabled>{ko ? '앞과 오른쪽' : 'Front / right'}</button>
         <button data-view="32" aria-pressed="false" disabled>{ko ? '앞과 왼쪽' : 'Front / left'}</button>
         <button data-view="148" aria-pressed="false" disabled>{ko ? '뒤쪽' : 'Back'}</button>
@@ -72,12 +74,12 @@ const data = JSON.stringify({ lesson, locale, slugs: allLessons.map(l => l.slug)
       <details class="full-sequence help-disclosure"><summary>{ko ? '예시 전체 순서와 정렬 보기' : 'Full example, including alignment'}</summary><p>{ko ? '기본 공식 사이의 윗면 정렬도 순서에 포함돼요. 이 정렬은 선택한 예시의 배치에 맞춘 것이에요.' : 'Top alignment between formulas is part of the sequence. These alignment moves fit the selected example.'}</p><ol data-full-sequence>{practice.blocks.map(block => <li><strong>{block.kind === 'formula' ? (ko ? `기본 공식 ${block.occurrence}회째` : `Formula repetition ${block.occurrence}`) : (ko ? '별도 정렬' : 'Separate alignment')}</strong><code>{block.moves.join(' ').replaceAll("'", '′')}</code></li>)}</ol></details>
       <details class="move-list help-disclosure"><summary>{ko ? '동작을 글로 보기' : 'Read the moves'}</summary><ol class="instruction-list" data-case-steps>{first.steps.map(step => <li>{text(step, locale)}</li>)}</ol></details>
       <p class="case-after" data-case-after>{text(first.after, locale)}</p>
-      <a class="text-link recovery-link" href="#recovery">{ko ? '막혔다면, 다시 확인하기' : 'Stuck? Review what to check'}</a>
+      <a class="button secondary utility-button recovery-link" href="#recovery">{ko ? '막혔다면, 다시 확인하기' : 'Stuck? Review what to check'}</a>
     </div>
   </div>
   <section class="completion-check" id="check">
     <div class="goal-diagram" aria-label={ko ? '예시 동작 이후의 기준 면' : 'Reference face after the example'}><div class="face-grid" data-goal-face={face}>{getFaceGrid(target, face).map(color => <span class={`color-${color}`} title={colorNames[locale][color]}>{colorNames[locale][color].slice(0, 1)}</span>)}</div><span>{ko ? `예시 ${faceLabel}` : `Example ${faceLabel.toLowerCase()}`}</span></div>
-    <div><h2><span class="task-number" aria-hidden="true">4</span>{ko ? '내 큐브에서 확인해요' : 'Check your real cube'}</h2><p>{text(lesson.check, locale)}</p><p class="small-note">{ko ? '시연이 끝나도 실물은 따로 확인해요. 그림은 예시예요.' : 'Check your real cube even when playback has ended. The picture is an example.'}</p></div>
+    <div><h2><span class="task-number" aria-hidden="true">3</span>{ko ? '내 큐브에서 확인해요' : 'Check your real cube'}</h2><p>{text(lesson.check, locale)}</p><p class="small-note">{ko ? '시연이 끝나도 실물은 따로 확인해요. 그림은 예시예요.' : 'Check your real cube even when playback has ended. The picture is an example.'}</p></div>
     <a class="button primary" data-complete href={supplementary ? `${base}/learn/white-cross/` : index < lessons.length - 1 ? `${base}/learn/${lessons[index + 1].slug}/` : `${base}/?finished=1`}>{supplementary ? (ko ? '흰 십자 만들기로 돌아가기' : 'Back to the white cross') : ko ? (index === lessons.length - 1 ? '완성했어요' : '맞췄어요, 다음 단계로') : (index === lessons.length - 1 ? 'I solved it' : 'Checked, next')}</a>
   </section>
   <RecoveryHelp lesson={lesson} locale={locale} />
@@ -86,8 +88,7 @@ const data = JSON.stringify({ lesson, locale, slugs: allLessons.map(l => l.slug)
     <details class="help-disclosure"><summary>{ko ? '모든 사례를 글로 보기' : 'Read every case'}</summary><div>{lesson.cases.map(c => <section class="written-case"><h3>{text(c.title, locale)}</h3><p>{text(c.when, locale)}</p><p>{text(c.hold, locale)}</p><ol>{c.steps.map(step => <li>{text(step, locale)}</li>)}</ol><p><code>{c.moves}</code></p><p>{text(c.after, locale)}</p></section>)}</div></details>
     <details class="help-disclosure"><summary>{ko ? '회전 기호는 무슨 뜻인가요?' : 'What do the letters mean?'}</summary><div><p>{ko ? 'R 오른쪽, L 왼쪽, U 위, D 아래, F 앞, B 뒤. 돌릴 면을 정면에서 바라볼 때 글자만 있으면 시계 방향 한 칸, 작은 따옴표(′)는 반시계 방향 한 칸, 2는 반 바퀴예요.' : 'R right, L left, U top, D bottom, F front, B back. Look straight at the face you turn: a letter means a clockwise quarter turn, a prime (′) means counterclockwise, and 2 means a half turn.'}</p></div></details>
   </div>
-  <nav class="lesson-path" aria-label={ko ? '학습 단계' : 'Learning stages'}>{lessons.map((l, i) => <a href={`${base}/learn/${l.slug}/`} aria-current={l.slug === lesson.slug ? 'step' : undefined}><span>{i + 1}</span>{text(l.shortTitle, locale)}</a>)}</nav>
-  <aside class="formula-dock" data-formula-dock hidden aria-label={ko ? '참고할 공식' : 'Formula reference'}><div><span data-dock-label>{ko ? '기본 공식' : 'Formula'}</span><div data-dock-formula>{practice.formula.map(move => <span>{move.replace("'", '′')}</span>)}</div></div><a href="#cube-practice" data-return-to-cube>{ko ? '시연으로' : 'To cube'}</a></aside>
+  <aside class="formula-dock" data-formula-dock hidden aria-label={ko ? '참고할 공식' : 'Formula reference'}><div><span data-dock-label>{ko ? '기본 공식' : 'Formula'}</span><div data-dock-formula>{practice.formula.map(move => <span>{move.replace("'", '′')}</span>)}</div></div><a class="button secondary utility-button" href="#cube-practice" data-return-to-cube>{ko ? '시연으로' : 'To cube'}</a></aside>
   <script type="application/json" id="lesson-data" set:html={data}></script>
 </div>
 <script>import '../scripts/lesson';</script>

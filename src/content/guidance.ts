@@ -23,7 +23,7 @@ export const guidance: Record<string, Guide> = {
     ],
   },
   'white-cross': {
-    before: c('노란 가운데는 위, 흰 가운데는 아래예요. 흰 모서리가 흩어져 있다면 위의 흰 조각 모으기 설명부터 봐요.', 'Keep yellow center up and white center down. If white edges are scattered, use the daisy help above first.'),
+    before: c('노란 가운데는 위, 흰 가운데는 아래예요.', 'Keep yellow center up and white center down.'),
     steps: [
       c('흰 꽃잎 하나의 옆 색을 읽어요. 꼭짓점이 아닌 두 색 조각을 골라요.', 'Read one white petal’s side color. Choose a two-color edge, not a corner.'),
       c('큐브 전체를 그대로 잡고 윗면만 돌려, 옆 색이 같은 색 가운데 바로 위에 오게 해요.', 'Hold the whole cube still. Turn only the top until that side color sits directly above its matching center.'),

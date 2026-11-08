@@ -1,8 +1,7 @@
 import puppeteer from 'puppeteer-core';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { solvedCube, applyAlgorithm, inverseAlgorithm, getFaceGrid } from '../src/lib/cube.ts';
-import { lessons } from '../src/content/lessons.ts';
+import { allLessons } from '../src/content/lessons.ts';
 
 const base = process.env.BASE_URL ?? 'http://127.0.0.1:4323';
 const key = 'namutree:cube:progress';
@@ -25,22 +24,39 @@ async function check(name, action) {
 const count = () => page.$eval('[data-move-count]', element => Number(element.textContent.split('/')[0].trim()));
 const ready = () => page.waitForFunction(() => !document.querySelector('[data-case]').disabled);
 try {
-  await check('visual preview: case selection shows the exact starting state without following playback', async () => {
-    for (const route of ['/learn/white-cross/', '/en/learn/middle-layer/', '/learn/finish/']) {
-      await go(route); await ready();
+  await check('visual preview: every case loads its rendered starting image without following playback', async () => {
+    for (const lesson of allLessons) {
+      await go(`/learn/${lesson.slug}/`); await ready();
       assert.ok(await page.$('[data-case-preview]'), '사례의 시작 그림이 있다');
-      const lesson = lessons.find(item => route.includes(`/${item.slug}/`));
       for (const item of lesson.cases) {
         await page.select('[data-case]', item.id);
-        const state = applyAlgorithm(applyAlgorithm(solvedCube(), item.targetSetup ?? ''), inverseAlgorithm(item.moves));
-        const faces = await page.$$eval('[data-preview-face]', groups => groups.map(group => ({ face: group.dataset.previewFace, colors: [...group.children].map(tile => [...tile.classList].find(name => name.startsWith('color-')).slice(6)) })));
-        assert.equal(faces.length, 3);
-        for (const face of faces) assert.deepEqual(face.colors, getFaceGrid(state, face.face), `${lesson.slug}.${item.id}.${face.face}`);
+        await page.$eval('[data-case-preview]', element => element.decode());
+        const image = await page.$eval('[data-case-preview]', element => ({ src: element.getAttribute('src'), width: element.naturalWidth, alt: element.alt }));
+        assert.equal(image.src, `/images/cases/${lesson.slug}-${item.id}.png`);
+        assert.equal(image.width, 560, '고해상도 이미지가 실제로 로드된다');
+        assert.ok(image.alt.includes(item.title.ko), '선택된 사례의 대체 설명을 제공한다');
       }
-      const before = await page.$eval('[data-case-preview]', element => element.innerHTML);
+      const before = await page.$eval('[data-case-preview]', element => element.src);
+      assert.equal(await page.$eval('.checkpoint-status', element => element.hidden), true, '시작 조건을 시연 상태에서 중복 표시하지 않는다');
       await page.click('[data-next]'); await ready();
-      assert.equal(await page.$eval('[data-case-preview]', element => element.innerHTML), before, '시작 그림은 시연 진행 중에도 고정된다');
+      assert.equal(await page.$eval('[data-case-preview]', element => element.src), before, '시작 그림은 시연 진행 중에도 고정된다');
+      assert.equal(await page.$eval('.checkpoint-status', element => element.hidden), false, '동작 후에는 확인 지점을 표시한다');
     }
+  });
+  await check('player: the first checkpoint keeps mobile playback controls in place', async () => {
+    await page.setViewport({ width: 390, height: 844 });
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+    for (const route of ['/learn/white-cross/', '/en/learn/white-corners/']) {
+      await go(route); await ready();
+      // 다음 동작을 계속 누르는 상황을 확인한다. 종료 안내로 바뀌는 단일 동작은 제외한다.
+      if (route.includes('white-cross')) await page.select('[data-case]', 'align-first');
+      const position = () => page.$eval('[data-next]', element => element.getBoundingClientRect().top + scrollY);
+      const before = await position();
+      await page.click('[data-next]'); await ready();
+      assert.ok(Math.abs(await position() - before) < 2, '확인 지점이 나타나도 한 동작 버튼의 문서 내 위치가 유지된다');
+      assert.equal(await page.$eval('.checkpoint-status', element => element.hidden), false);
+    }
+    await page.emulateMediaFeatures([]);
   });
   await check('journey: bilingual starting points follow the main course', async () => {
     for (const prefix of ['', '/en']) {
@@ -154,8 +170,7 @@ try {
     assert.equal(await page.$eval('.hero-actions a.primary', element => element.getAttribute('href')), '/learn/white-cross/');
     assert.deepEqual(await page.$$eval('.lesson-list a', elements => elements.map(element => element.getAttribute('href'))), ['white-cross','white-corners','middle-layer','yellow-cross','yellow-edges','yellow-corners','finish'].map(slug => `/learn/${slug}/`));
     await go('/learn/white-cross/'); await ready();
-    assert.ok(await page.$('.cross-setup a[href="/learn/daisy/"]'));
-    assert.equal(await page.$eval('.cross-start', element => element.open), false);
+    assert.ok(await page.$('.lesson-preparation a[href="/learn/daisy/"]'), '흰 조각 모으기는 준비 영역의 선택 가능한 도움말이다');
     assert.equal(await page.$eval('.goal-preview', element => element.getBoundingClientRect().bottom <= innerHeight), true);
     assert.doesNotMatch(await page.$eval('main', element => element.innerText), /보호자/);
     await go('/learn/daisy/'); await ready();
@@ -514,7 +529,7 @@ try {
       await plain.setJavaScriptEnabled(false);
       await plain.goto(new URL('/en/learn/white-corners/', base).href, { waitUntil: 'networkidle0' });
       assert.ok(await plain.$eval('[data-case-steps]', element => element.children.length > 0));
-      assert.equal((await plain.$$('[data-case-preview] .preview-sticker')).length, 27);
+      assert.equal(await plain.$eval('[data-case-preview]', element => element.complete && element.naturalWidth === 560), true);
       assert.ok(await plain.$eval('[data-algorithm]', element => element.children.length > 0));
       assert.ok((await plain.$eval('noscript', element => element.textContent)).includes('JavaScript'));
       assert.equal(await plain.$eval('[data-next]', element => element.disabled), true);

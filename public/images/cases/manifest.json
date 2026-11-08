@@ -1,0 +1,30 @@
+{
+  "signature": "ad076a8d1b1f5a46d4e041104eacf815433103c87174433c9ea9c5b738e53104",
+  "files": {
+    "ready-turn-and-return.png": "c61cc65690fe3eed6748cba328c4038d62104e8ca55353ece8c09fa02539a842",
+    "daisy-bottom.png": "a5e510b182e1dc7e0468d15ae93c2d188c721839fa20e0cb44f3c3e76f353095",
+    "daisy-middle-front.png": "65ac9170eddf0ed33c2d7e5a40e6f7f370efbe5ee7ace4eae599e0c944fb792f",
+    "daisy-middle-right.png": "199d9b37690886603521cce18bdf2bbe53f2399d114bedfd5decaa5b51d042e9",
+    "daisy-lower-side.png": "b6559919e315d8a45e603188f02621962a93f40ecd771358523198c358ee8607",
+    "daisy-top-side.png": "98d596c6f6762ea251fba3613ac77cc79f0b5d6fdc38e0410b6b5d064bd876e1",
+    "white-cross-aligned.png": "f8b166e850422c0409ab9b1f9c28678f8b4b76e4a1715bab6882c83a6fcb6d01",
+    "white-cross-align-first.png": "a71023b8837a99a1f71fc7ea73cd45fd1cfb4f0934f490fc030bc0d0f7963924",
+    "white-corners-white-right.png": "e5cef98f884992cf9fb450188995aa019b719f7bcff6743f189ddc6bb825e792",
+    "white-corners-white-up.png": "8fc20b4e596956289fb1a54b67056c152150fb27a7fad7d85c3eb77a30b7d353",
+    "white-corners-white-front.png": "9fc40b91a592cf72a385657163d6a741725e610645d2fc66d926764aa0364f19",
+    "white-corners-eject-corner.png": "065f2c58947633a825b791135b4af6a08a87fb738bdf73cae818a261871ef45a",
+    "middle-layer-insert-right.png": "45eb40cf695267f0277d5d881b29aff52a148a40f46e04b095b669fe78eb1d6b",
+    "middle-layer-insert-left.png": "fadbf1915186c35779f5af57cd1c92f8b2fdfd4130345313411881c6a391129b",
+    "middle-layer-eject-edge.png": "93d57b291cbca1054b009721b21aebe1eb4e40cfe50ade91501c37dfade8669a",
+    "yellow-cross-line.png": "43f00ecc0c749478e06e25866fb389c46727f86b06c0051e684f5265039986a2",
+    "yellow-cross-elbow.png": "a9ec48b55b0c900a8fc195e167d316daeffc276d23e2107732e975f85a4078eb",
+    "yellow-cross-dot.png": "3ea807e993f902cef5afbd144e70e93132e8721d7c1c2545bc10bcb0f5c19961",
+    "yellow-edges-adjacent.png": "42e7f5005c77b0eb8cd4042fcbc1bdd50af909b9262377a5066e7344c8f19591",
+    "yellow-edges-opposite.png": "21ad816f213a86de1ba600fb3978674ee869fbbe3437a006472c701ad4a21ac7",
+    "yellow-corners-one-correct.png": "afef9fd4bce067ad49f75c3c59a8df5c5968f8cd03c2b628daf7ac0caaf0006f",
+    "yellow-corners-one-correct-twice.png": "3dc3691f4634ca6939021f3b1b06483c8eb5556db0b838b24f2e7c571f162f50",
+    "yellow-corners-none-correct.png": "1f11c6e5cd56b76ad1691a2aa068af3a362294e3892a285dc813fb32fc6d295a",
+    "finish-complete-walkthrough.png": "0297fea51de80427d5e76865d75296eed86752d7a9035d67a087b1b69142f890",
+    "finish-two-corners-front.png": "644ccc23a674b373a78b28fd0a9a572e546bb5a2c9d2e66aa9f805cf561a5687"
+  }
+}

@@ -58,6 +58,7 @@ if (host && json?.textContent) {
     formula.update(cursor, busy);
     const phaseIndex = current.checkpoints.findIndex(point => cursor <= point.at);
     const phase = current.checkpoints[phaseIndex];
+    q('.checkpoint-status').hidden = cursor === 0;
     q('[data-checkpoint-title]').textContent = `${phaseIndex + 1} / ${current.checkpoints.length}: ${phase.title[locale]}`;
     q('[data-checkpoint-copy]').textContent = cursor === phase.at ? phase.check[locale] : cursor === 0 ? current.when[locale] : (ko ? '이번 묶음의 동작을 끝까지 한 뒤 확인해요. 앞면을 바꾸지 않아요.' : 'Finish this group before checking. Keep the same front.');
     const solved = isSolved(frames[cursor]);
@@ -97,17 +98,9 @@ if (host && json?.textContent) {
     for (const move of moves) frames.push(applyMove(frames[frames.length - 1], move));
     cursor = 0;
     view.render(frames[0]);
-    const preview = host!.querySelector<SVGSVGElement>('[data-case-preview]')!;
-    const previewLabel = `${ko ? '시작 예시' : 'Starting example'}: ${current.title[locale]}`;
-    preview.setAttribute('aria-label', previewLabel);
-    preview.querySelector('[data-preview-title]')!.textContent = previewLabel;
-    preview.querySelectorAll<SVGGElement>('[data-preview-face]').forEach(group => {
-      const colors = getFaceGrid(frames[0], group.getAttribute('data-preview-face') as Face);
-      Array.from(group.children).forEach((tile, index) => {
-        tile.setAttribute('class', `preview-sticker color-${colors[index]}`);
-        tile.querySelector('title')!.textContent = colorNames[locale][colors[index]];
-      });
-    });
+    const preview = q<HTMLImageElement>('[data-case-preview]');
+    preview.src = `/images/cases/${lesson.slug}-${current.id}.png`;
+    preview.alt = `${ko ? '시작 예시의 위·앞·오른쪽 면' : 'Top, front and right of the starting example'}: ${current.title[locale]}`;
     q('[data-case-when]').textContent = current.when[locale];
     q('[data-case-hold]').textContent = current.hold[locale];
     q('[data-case-after]').textContent = current.after[locale];
